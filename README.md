@@ -1,7 +1,4 @@
 # ENGR101-TeamOne-
-Hosting ground for anything and everything related to the AVC for Team One.
-
-Reference details:
 
 Team Name: ONE
 
@@ -64,3 +61,5 @@ Document everything
 
 General rules of thumb:
 Get involved! There's nothing to be afraid of - no mistake can't be un-done, but your planning could well save someone else hours.
+
+Note: I gotta figure out how to do formatting in this nicely.
