@@ -11,8 +11,9 @@ Week:
 3) Prototypes and demos, finalizing hardware - bringing most promising concepts into reality, refining ideas, etc.
 
 General mindset:
-Software goals will be planned out cohesively in advance, as most members are more comfortable in this area. Hardware can then fit around
-these dates (with adjustments for lenience) - eg. custom chassis unneeded until after week 3, as initial goals/quadrants can be completed
+Software goals will be planned out cohesively in advance, as most members are more comfortable in this area. Hardware can then fit 
+around these dates (with adjustments for lenience) - eg. custom chassis unneeded until after week 3, as initial goals/quadrants 
+can be completed
 without.
 
 We want a basic template ASAP before we do anything, so the code-base knows what it's working with.
@@ -26,4 +27,12 @@ Fourth quadrant: navigate maze (turning/banking/reversing in limited space, etc.
 Hardware limitations:
 All hardware must be from class, purchased with a budget of Arthur$, or 3D-printed (after design in CAD). Limitation on 3D printing.
 
-Note: Patrick shall be sternly questioned regarding his absence and commitment to this project he doesn't yet know we've begun.
+Note: Patrick shall be sternly questioned regarding his absence and his commitment to this project he doesn't yet know we've begun.
+
+Achievements:
+Nitay: ssh'd into rPI, camera working/displaying on monitor, being general tech genius/tutor askerer for helper
+Matt: pants-wearer, broad-planning and oversight/team manager
+Kate: google documenter, cohesive documentation on any/all clashes and potential issues
+Dash: information collate-er, github
+
+Bonus: Nitay & Matt made the wheels spin, moved the wheels for balance etc, general superheroes
