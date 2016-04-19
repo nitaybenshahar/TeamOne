@@ -15,7 +15,7 @@ Goals decided on for subsequent weeks:
 We decided that for our week break we decided to limit people’s tasks to  brainstorming and coming up with ideas as 3 of our 6 members are away for most or all of the week. Our goal is for everyone to have ideas for how to approach each quadrant and an understanding of what needs to happen.
 
 For the first week back we decided that we would confirm a plan of action for both our software and hardware and to start trialling and prototyping our ideas.
-By the end of the week Chintan & Patrick will aim to have code to make the robot move in a straight line.
+By the end of the week Chintan & Dash will aim to have code to make the robot move in a straight line.
 Everyone will have committed something to github.
 Nitay & Matt will have come up with a chassis design.
-Kate & Dash will help where needed, ensure everyone is on track.
+Kate will help where needed, ensure everyone is on track.
