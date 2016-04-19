@@ -1,0 +1,5 @@
+1) Setup Pi
+2) In the terminal, type "sudo ifconfig"
+3) The IP address is under wlan0, inter addr
+4) From the computer terminal, type "ssh pi@(IP addr)"
+Yay done!
