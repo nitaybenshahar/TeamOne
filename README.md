@@ -4,7 +4,7 @@ Team Name: ONE
 
 Member / GoogleDocs / Github / Role
 
-Dash Vallance / vallance.dash@gmail.com / jaytewkay / Report
+Dash Vallance / vallance.dash@gmail.com / jaytewkay / Software
 
 Nitay Ben-Shahar / nitaybenshahar@gmail.com / nitaybenshahar / Hardware
 
@@ -12,7 +12,7 @@ Chintan Patel / sir.chintan@gmail.com / Arcanine-X / Software
 
 Kate Murray / Katiemouse.Murray@gmail.com / Katiemouse / Report
 
-Patrick Harrison / ABS / Software
+Patrick Harrison / ABS / Absent
 
 Matt Matchett / matt.matchett23@gmail.com / mattMatchett / Hardware
 
