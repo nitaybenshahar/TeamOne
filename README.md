@@ -1,6 +1,25 @@
 # ENGR101-TeamOne-
 Hosting ground for anything and everything related to the AVC for Team One.
 
+Reference details:
+
+Team Name: ONE
+
+Member / GoogleDocs / Github / Role
+
+Dash Vallance / vallance.dash@gmail.com / jaytewkay / Report
+
+Nitay Ben-Shahar / nitaybenshahar@gmail.com / nitaybenshahar / Hardware
+
+Chintan Patel / sir.chintan@gmail.com / Arcanine-X / Software
+
+Kate Murray / Katiemouse.Murray@gmail.com / Katiemouse / Report
+
+Patrick Harrison / ABS / Software
+
+Matt Matchett / matt.matchett23@gmail.com / mattMatchett / Hardware
+
+
 Brief: Weeks are Monday to Sunday ie. all weeks beginning Monday of.
 
 Dates:
