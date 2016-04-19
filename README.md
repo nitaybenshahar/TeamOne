@@ -1,5 +1,5 @@
 # ENGR101-TeamOne-
-Any and all work related to the AVC for TeamOne.
+Hosting ground for anything and everything related to the AVC for Team One.
 
 Brief: Weeks are Monday to Sunday ie. all weeks beginning Monday of.
 
