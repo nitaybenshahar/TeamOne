@@ -1,1 +1,21 @@
+AVC – Team One 
 
+20/04/16
+Today we wrote our AVC Plan out and collected our hardware, that was the only goals that we set for this week as there is not much of the week left, which means we achieved all of our goals for week 1. We also decided on people’s roles. We also aimed to have Dash set up GitHub repo, Kate set up an achievement monitoring document and Nitay start up the Pi.
+
+Break down of achievements:
+Dash - set up Git repo and Read me
+Kate - took photos of the course and helped with the AVC plan (and set up this document)
+Matt - wrote out the AVC plan and helped work on the Pi.
+Nitay - ssh'd into rPI, got the camera working/displaying on monitor and has the wheels moving.
+Chintan - worked on the AVC plan - specifically allocating tasks and conflicts.
+Patrick - absent
+
+Goals decided on for subsequent weeks:
+We decided that for our week break we decided to limit people’s tasks to  brainstorming and coming up with ideas as 3 of our 6 members are away for most or all of the week. Our goal is for everyone to have ideas for how to approach each quadrant and an understanding of what needs to happen.
+
+For the first week back we decided that we would confirm a plan of action for both our software and hardware and to start trialling and prototyping our ideas.
+By the end of the week Chintan & Patrick will aim to have code to make the robot move in a straight line.
+Everyone will have committed something to github.
+Nitay & Matt will have come up with a chassis design.
+Kate & Dash will help where needed, ensure everyone is on track.
