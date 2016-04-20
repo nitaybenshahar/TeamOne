@@ -12,7 +12,7 @@ Chintan Patel / sir.chintan@gmail.com / Arcanine-X / Software
 
 Kate Murray / Katiemouse.Murray@gmail.com / Katiemouse / Report
 
-Patrick Harrison / ABS / Absent
+Patrick Harrison / keripat@gmail.com / TBC / TBC
 
 Matt Matchett / matt.matchett23@gmail.com / mattMatchett / Hardware
 
