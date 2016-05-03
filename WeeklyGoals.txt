@@ -18,4 +18,29 @@ For the first week back we decided that we would confirm a plan of action for bo
 By the end of the week Chintan & Dash will aim to have code to make the robot move in a straight line.
 Everyone will have committed something to github.
 Nitay & Matt will have come up with a chassis design.
-Kate will help where needed, ensure everyone is on track.
+Kate will help where needed, and ensure everyone is on track.
+
+04/05/16
+Today we discussed different options for programming approaches and decided to start with a trial and error method that while it would take longer for the robot, it would be easier to code so we can have it as a backup in case our other ideas don’t work. Our other idea is to see if a branch is a dead end at the intersection with deeper image processing. This will all depend on the amount of time we have. We also discussed the possibility of having 3 sensors vs the camera judging the wall distance in the maze. The camera would be harder to code for, with the sensors being easier, but the sensors are more likely to go over budget, and we aren’t yet sure how to budget for the sensors, as we don’t have a run down of the ‘Arthur Dollars’ - upon consultation we have found that the main purpose of the ‘Arthur dollar’ system is to prevent us from using a huge number of sensors, so we are unlikely to go over budget. We also realised that the short range sensors don’t measure a decent enough size for the walls, so we are going to use medium range ones, which we originally intended for the front. These are too short to use for the front, so we are probably going to have to use the camera for the front of the robot.
+
+Ideas:
+From quad 1-3 to 4 change: have a while statement that breaks when there are walls on either side of it, as the entrance of the maze has a wall on either side.
+Have the robot follow the left most line of white pixels rather than the whole thing.
+
+Accomplishments 
+
+Nitay and Matt have made a chassis design with the help of Patrick. The design will be uploaded to Github by Matt.
+
+Chintan worked on code for moving the robot move in a straight line with help from Nitay.
+
+Dash wrote out a program plan, to give us a broad idea of what we aim to have the program look like.
+
+Kate wrote up the ideas, and decisions from last week and worked on assigning tasks for the next week.
+
+Tasks for completion by next week
+Kate        Work on the code
+Dash        Will have a complete program plan.
+Chintan    Work on the code
+Matt        Will work on getting a chassis design uploaded to Github.
+Patrick        Work on the code
+Nitay        Work on the code
