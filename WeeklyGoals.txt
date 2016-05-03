@@ -31,7 +31,7 @@ Accomplishments
 
 Nitay and Matt have made a chassis design with the help of Patrick. The design will be uploaded to Github by Matt.
 
-Chintan worked on code for moving the robot move in a straight line with help from Nitay.
+Chintan worked on code for moving the robot move in a straight line with help from Nitay. They got the signal working, but then had issues with the rPi. After tried trialling, testing and some help but in the end they still never managed to get the code to work on the rPi.
 
 Dash wrote out a program plan, to give us a broad idea of what we aim to have the program look like.
 
