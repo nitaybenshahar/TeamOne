@@ -1,0 +1,88 @@
+GOAL OF THIS DOCUMENT: Programming something when you aren't experienced in the mechanics can quickly become complicated and convoluted. 
+This plan is to act as a rough guideline/notepad of thoughts and planning, to be refined and referenced as the program is written. 
+Basically, I'm trying to turn the process that happens in my head while coding into a readable document which others can understand and 
+adjust, albeit more formalised to avoid confusion/mess.
+
+Variables
+
+Notes: DEFINE ALL FIELDS/VARIABLES/NUMBERS CLEARLY
+
+For example: Integral constant = NOT Pi (positioning integral) but (possibly) Ki (to avoid confusion with pi) or pInt.
+// Try to comment anything that might be ambiguous
+
+Actual program has four requirements:
+1) Operate gate through signal
+2) Operate motor & follow white line
+3) Navigate dummy lines
+4) Navigate maze
+
+Requirement 3 is really just a modification of 2, leaving 3 separate methods to operate under different conditions.
+
+As well as this, we need a [takephoto] loop and a suitable interval. Probably easiest to make this will be a fixed sleep command - a 
+UNIX time calculation may be more accurate, and lead to better refresh rate, but if there's any variance (say, as the battery runs down)
+then the time calculation has to run every loop (or nearly every loop) and that's bloating the program (and presumably wasting 
+processing time).
+Ie. this could get really complicated and messy really quick for very little gain. Ingenius solutions welcome - still a few questions 
+to answer. 
+Eg. How precise can you be with a simple sleep command? 
+Do we need to set our sleep command to fit the greatest processing delay possible (ie. low battery), or can we set some scale factor?
+
+IMPORTANT PART: Broad structure planning:
+//This should hopefully make it clear what to do (or what you're doing) if you decide to write some code.
+
+CONDITION: IF WALL
+(should be easy to define sensor outputs for the initial gate; maybe make a boolean which is toggled yes/no by a sensor reading)
+
+METHOD: SEND SIGNAL
+(believe we're just slightly adjusting what's been posted to Elf's page here)
+
+CONDITION: WHILE [LINE EXISTS]
+
+[LINE EXISTS] = boolean again? defined by sensors - is there a strip of white in the picture.
+
+METHOD: RUN LINE-FOLLOW 
+
+Likely hardest part, simply needs to be modified for the maze.
+Known variables from here: positioning scaler, integral scaler, derivative scaler
+Presumably a motor value scaler also (to convert the output of PID calc into a percentage, so that turn rates can be scaled).
+
+[Y] = motors value
+(Y1, Y2 - Y2 can simply be the inverse of Y1, if Elf is to be believed)
+
+Hard part: turning method in response to being off [IDEAL POINT] (currently defined as leftmost edge of white)
+
+If the leftmost edge things works, we do get to skip a [HUG LEFT] method (it's inherent).
+
+May still need CONDITION: IF [LINE DOES NOT EXIST] as a failsafe, followed by a pivot/METHOD: [FIND LINE] 
+
+Otherwise it's just [FIND LEFT POINT], [RUN ERROR CORRECTION/POSITIONING METHOD] until the maze.
+ 
+Need some (boolean?) check - 
+IF TWO SEPARATE WALLS AT X1, X2, set boolean MAZE = TRUE;
+
+CONDITION: WHILE [MAZE == TRUE], 
+
+METHOD: RUN MAZE 
+If the [HUG LEFTMOST] plan works, it can be adapted for the maze by saying [FIND MAZE WALL TO LEFT], subtracting a value (so that it's not literally hitting the wall)
+and setting that as the [POSITIONING POINT]. Will be more complicated (in both instances) due to the fish bowl camera effect.
+
+
+Finally, THOUGHTS/PROBLEMS (here for reference until we have solutions):
+
+Camera method vs sensor methods - when, how, can we combine
+
+Research - limitations/speed of processing - processing image into series of steps, or calculating one step at a time: which is more
+effective/practical. IE. Do we work in sections or recalculate every [refresh rate].
+Note: momentary trial & error > suggested by tutor.
+
+White line = fixed, MAZE IS NOT
+
+Method for following leftmost edge of white? (Shortcut/efficiency) Are we just defining the target point as where [to the left] = black and [to the right] = white?
+Are there any potential issues that level of precision could cause with our error correction?
+
+Define refresh rate - dependent on speed (likely just trial and error - multiple values may be necessary, or dependent value based on angle of turning)
+
+
+Any simple way to correct the fishbowl effect and have an accurate picture? Make a crane out of bamboo for the camera on the chassis & bird's eye view it?
+Amalgamate the camera and sensor readings somehow?
+Seems complicated and hard, guessing we'll be stuck with trial and error tuning.
