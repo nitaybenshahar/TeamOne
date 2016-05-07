@@ -25,7 +25,8 @@ int main()
     return 0; // didn't the tutor say you delete the return 0 incase it causes an issue?
     
     // probably want to add a [set motor speed to 0] function at the end of this so you don't have the pi just running the motor
-    // endlessly without a way to stop it when it comes time to test.
+    // endlessly without a way to stop it when it comes time to test. Think arthur was insistent on that when we were playing with
+    // this stuff last time.
 
 
 
