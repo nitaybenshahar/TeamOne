@@ -32,7 +32,6 @@ int main(){
     double errorSignal;//the total distance away from the line
     double prop;//scaled error signal of proportionality, scaled for motor to handle
     double currentError = 0; // initialised so won't break, separated for comparison with derivative - mb unnecessary
-    double whiteTotal; // aka current error value
     double prevError;
 
     while(true){
