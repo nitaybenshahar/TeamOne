@@ -31,6 +31,9 @@ int main(){
 
     double errorSignal;//the total distance away from the line
     double prop;//scaled error signal of proportionality, scaled for motor to handle
+    double currentError = 0; // initialised so won't break, separated for comparison with derivative - mb unnecessary
+    double whiteTotal; // aka current error value
+    double prevError;
 
     while(true){
         //initialise values
@@ -38,13 +41,15 @@ int main(){
         int numberOfWhite = 0;//running total of the number of white pixels
 
         for(int i=0; i<320; i++){
+            prevError = currentError; // for derivative
             take_picture();
             ////////////////////////////////////////////////////////////////
             display_picture(2,0); //Display picture for debugging purposes
             ////////////////////////////////////////////////////////////////
             //get pixel "whiteness"
             //resolution of image is 320x240
-            c = get_pixel(i,200,3);
+            c = get_pixel(i,220,3); // adjusted to take pixel closer to bot (1/6 seemed far up), likely need testing
+            
 
             if(c<150){
                 c = 0;  //Black pixel
@@ -53,17 +58,33 @@ int main(){
                 c = 1;   //white pixel
                 numberOfWhite++;
             }
-            whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
+            whiteTotal = whiteTotal + (i-148)*c; //add the position of the white pixels (if its white)
+            // dummy adjustment to change leftmost point to center for line solving; estimated line width ~= 80/1080 (from elf pic)
+            // = 0.074* 	 0.074*320/2 = 11.85 > ~= 12
+            // obviously to be adjusted with testing (if this idea even works)
+            currentError=+ whiteTotal
+            
         }
         errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
 		////////////////////////////////////////////////////////////
 		printf("%f", errorSignal); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
-        prop = (errorSignal*127/160);//proportional control
+        prop = (errorSignal*127/148);//proportional control // note: I might have broken this (no longer 1/2 image size, mayy scale weird)
+        
+       /* Sleep(0,100000)
+
+	derivative_signal = (current_error-previous_error/0.1)*kd;
+
+	previous_error = current_error;
+
+	printf("Derivative signal is: %d", derivative_signal );
+
+	set_motor(1, derivative_signal);*/  // to be adapted - I'm going to sleep
+        
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
 
-        double rightMotor = 127-kp*prop;
+        double rightMotor = 127-kp*prop; // note these are min/max values, not 255 (8bit integer, range of 255 ie. -127 to 127)
         double leftMotor = -(127+kp*prop);//negative so motors turn in the same direction
 
         set_motor(1, rightMotor); //set motor speeds
