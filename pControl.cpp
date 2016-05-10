@@ -16,8 +16,9 @@ int main(){
     init(0);
     
     connect_to_server("192.168.1.2", 1024); //Code that may or may not open the gate
-    send_to_server("please");
+    send_to_server("please"); //sends a password to the connected server
     char message[24];
+    //receives message from the connected server
     receive_from_server(message);
     
     //Define variables
