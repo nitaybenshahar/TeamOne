@@ -5,6 +5,8 @@ adjust, albeit more formalised to avoid confusion/mess.
 
 Variables
 
+Wires always go red, black, red, black.
+
 Notes: DEFINE ALL FIELDS/VARIABLES/NUMBERS CLEARLY
 
 For example: Integral constant = NOT Pi (positioning integral) but (possibly) Ki (to avoid confusion with pi) or pInt.
