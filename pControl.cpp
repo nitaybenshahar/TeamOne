@@ -6,11 +6,20 @@ extern "C" int take_picture();
 extern "C" char get_pixel(int row,int col,int colour);
 extern "C" int Sleep(int sec, int usec);
 extern "C" int set_motor(int motor , int speed );
+extern "C" int connect_to_server( char server_addr[15],int port);
+extern "C" int send_to_server(char message[24]);
+extern "C" int receive_from_server(char message[24]);
 
 int main(){
     //This sets up the RPi hardware and ensures
     //everything is working correctly
     init(0);
+    
+    connect_to_server("192.168.1.2", 1024); //Code that may or may not open the gate
+    send_to_server("please");
+    char message[24];
+    receive_from_server(message);
+    
     //Define variables
     char c; //stores whiteness of pixel
     float kp = 1; //constant of proportionality control
