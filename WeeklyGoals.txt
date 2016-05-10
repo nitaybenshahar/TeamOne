@@ -44,3 +44,12 @@ Chintan    Work on the code
 Matt        Will work on getting a chassis design uploaded to Github.
 Patrick        Work on the code
 Nitay        Work on the code
+
+11/05/16
+We have made the decision to up our meetings to two a week, and to set more specific goals to ensure that we will get everything done in time. Meetings will be on Thursdays from 4 to whenever. Nitay will struggle to make these, but this is the best time to get as many as possible.
+The meeting for this week will be for us to bullet point out our progress report and therefore clarify how far along each aspect of the project is.
+
+Today we (Dash, Nitay, Kate and Chintan) got the camera to record the image at regular intervals and record the location of the white space. We got the motors moving and turning relative to the location of the white space.
+
+Patrick and Matt worked on making a 3D model of the chassis that can be 3D printed.
+
