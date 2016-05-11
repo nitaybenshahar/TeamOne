@@ -37,12 +37,14 @@ int main(){
         //initialise values
         int whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
         int numberOfWhite = 0;//running total of the number of white pixels
+        
+        take_picture();
+        ////////////////////////////////////////////////////////////////
+        display_picture(2,0); //Display picture for debugging purposes
+        ////////////////////////////////////////////////////////////////
 
         for(int i=0; i<320; i++){
-            take_picture();
-            ////////////////////////////////////////////////////////////////
-            display_picture(2,0); //Display picture for debugging purposes
-            ////////////////////////////////////////////////////////////////
+            
             //get pixel "whiteness"
             //resolution of image is 320x240
             c = get_pixel(i,200,3);
@@ -56,9 +58,16 @@ int main(){
             }
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
         }
-        errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
+        if(numberOfWhite != 0){ //To avoid division by zero
+        	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
+        }
+        else
+        {
+        	//What to do when the robot looses the line??
+        }
+        
 		////////////////////////////////////////////////////////////
-		printf("%f", errorSignal); //Print error signal for Debugging purposes
+		printf("%f\n", errorSignal); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
