@@ -1,3 +1,11 @@
+#Meeting Times:
+
+Lab: Wednesday 1000 
+
+Extra meeting: Thursday 1600
+
+Nital Special Meeting: Friday between 0900 and 1200
+
 # ENGR101-TeamOne-
 
 Team Name: ONE
