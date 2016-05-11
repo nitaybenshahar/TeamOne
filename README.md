@@ -1,3 +1,15 @@
+#Weekly Goals
+
+Gate Open Working
+
+Single Line Follow Working
+
+Camera, Pi, Battery Mounts Designed and Printed (More if possible)
+
+Dimension Database Uploaded
+
+Component Input Table Uploaded
+
 #Meeting Times:
 
 Lab: Wednesday 1000 
