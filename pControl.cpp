@@ -21,6 +21,7 @@ int main(){
 	send_to_server("please"); 
 	char message[24];
 	receive_from_server(message);
+	send_to_server(message);
     
     
     //Define variables
