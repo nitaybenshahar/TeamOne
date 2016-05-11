@@ -32,11 +32,17 @@ int main(){
 
     double errorSignal;//the total distance away from the line
     double prop;//scaled error signal of proportionality, scaled for motor to handle
+    // moved all these so they initialised here - initialising in a loop might cause weird memory stuff? iuno
+    double rightMotor;
+    double leftMotor;
+    int whiteTotal;
+    int numberOfWhite;
 
     while(true){
         //initialise values
-        int whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
-        int numberOfWhite = 0;//running total of the number of white pixels
+        whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
+        numberOfWhite = 0;//running total of the number of white pixels
+        
         
         take_picture();
         ////////////////////////////////////////////////////////////////
@@ -44,7 +50,7 @@ int main(){
         ////////////////////////////////////////////////////////////////
 
         for(int i=0; i<320; i++){
-            
+        	
             //get pixel "whiteness"
             //resolution of image is 320x240
             c = get_pixel(i,200,3);
@@ -58,28 +64,45 @@ int main(){
             }
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
         }
-        if(numberOfWhite != 0){ //To avoid division by zero
-        	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
-        }
-        else
-        {
-        	//What to do when the robot looses the line??
-        }
+        if (numberOfWhite == 0){ // this should never happen for first 3 quadrants - useful for debugging, though
+       		printf("%s", "\nNo white detected");
+       		break; // should become 'cut to maze method' later, will just make a 'motorspeed = 0' method for now
+       	}
         
+        if (whiteTotal >= 0) && (numberOfWhite => 1) { // Arthur's adjustment, adjusted a little more
+        // && number of white clause is so that it doesn't try to divide by 0. I think this was our bug
+        // Needs more review - we may still have no way to track when it's left of center
+       	// might actually still be broken if we can't get exact center values or left values to print
+
+        	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
+        	
 		////////////////////////////////////////////////////////////
-		printf("%f\n", errorSignal); //Print error signal for Debugging purposes
+		printf("%d",\n errorSignal); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
+        } // likely else if statement for negative values to go here - commented out because tired & may not work
+        /* else if (whiteTotal < 0) && (numberOfWhite => 1) {
+        	errorSignal = whiteTotal/numberOfWhite;
+        	printf("%d", errorSignal);
+        } // note - all this is super redundant if the bug is just to do with #numberOfWhite, & if its not this may not work
+        // if it works, delete this and change the first method (delete the whiteTotal portion, make condition "if numberOfWhite != 0"
+        // or just >0 since it should never go negative
+        */
+        
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
 
-        double rightMotor = 127-kp*prop;
-        double leftMotor = -(127+kp*prop);//negative so motors turn in the same direction
+        rightMotor = 127-kp*prop;
+        leftMotor = -(127+kp*prop);//negative so motors turn in the same direction
 
         set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
 
     }
-
+    // closing method once loop is exited - makes motors stop
+    // should run if the camera ever detects 'no white'
+    set_motor(1, 0);
+    set_motor(2, 0);
+    printf(%s, "\nProgram fin")
     return 0;
 }
