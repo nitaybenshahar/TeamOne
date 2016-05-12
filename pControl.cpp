@@ -8,22 +8,10 @@ extern "C" int Sleep(int sec, int usec);
 extern "C" int set_motor(int motor , int speed );
 extern "C" int display_picture(int delay_sec,int delay_usec);
 //Networks, sending signal
-extern "C" int connect_to_server( char server_addr[15],int port);
-extern "C" int send_to_server(char message[24]);
-extern "C" int receive_from_server(char message[24]);
 
 int main(){
     //This sets up the RPi hardware 
-    init(0);
-    
-    //Send signal to gate
-    connect_to_server("192.168.1.2", 1024);
-	send_to_server("please"); 
-	char message[24];
-	receive_from_server(message);
-	send_to_server(message);
-    
-    
+    init(1);
     //Define variables
     char c; //stores whiteness of pixel
     float kp = 1; //constant of proportionality control
@@ -65,11 +53,11 @@ int main(){
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
         }
         if (numberOfWhite == 0){ // this should never happen for first 3 quadrants - useful for debugging, though
-       		printf("%s", "\nNo white detected");
+       		printf("%s\n", "No white detected");
        		break; // should become 'cut to maze method' later, will just make a 'motorspeed = 0' method for now
        	}
         
-        if (whiteTotal >= 0) && (numberOfWhite => 1) { // Arthur's adjustment, adjusted a little more
+        if ((whiteTotal >= 0) && (numberOfWhite >= 1)) { // Arthur's adjustment, adjusted a little more
         // && number of white clause is so that it doesn't try to divide by 0. I think this was our bug
         // Needs more review - we may still have no way to track when it's left of center
        	// might actually still be broken if we can't get exact center values or left values to print
@@ -77,16 +65,15 @@ int main(){
         	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
         	
 		////////////////////////////////////////////////////////////
-		printf("%d",\n errorSignal); //Print error signal for Debugging purposes
+		printf("%d\n", errorSignal); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
         } // likely else if statement for negative values to go here - commented out because tired & may not work
-        /* else if (whiteTotal < 0) && (numberOfWhite => 1) {
+         else if ((whiteTotal < 0) && (numberOfWhite >= 1)) {
         	errorSignal = whiteTotal/numberOfWhite;
         	printf("%d", errorSignal);
         } // note - all this is super redundant if the bug is just to do with #numberOfWhite, & if its not this may not work
         // if it works, delete this and change the first method (delete the whiteTotal portion, make condition "if numberOfWhite != 0"
         // or just >0 since it should never go negative
-        */
         
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
@@ -101,8 +88,10 @@ int main(){
     }
     // closing method once loop is exited - makes motors stop
     // should run if the camera ever detects 'no white'
-    set_motor(1, 0);
-    set_motor(2, 0);
-    printf(%s, "\nProgram fin")
+   set_motor(1, 0);
+   set_motor(2, 0);
+    printf("%s", "\nProgram fin");
     return 0;
 }
+
+
