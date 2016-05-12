@@ -1,0 +1,118 @@
+Bullet Points to work from:
+
+Use this page if you want to see where I got some of this info from: https://github.com/kaiwhata/ENGR101-2016/wiki/Report-Writing-guide
+
+Intro, backgound, methods, results and discussion are NECESSARY to get a mark above 75% in the FINAL report.
+
+
+Sections to include in the report are:
+
+    Title Page
+    Abstract
+    Introduction
+    Background
+    Method
+    Results
+    Discussion
+    Conclusions
+    future work
+    acknowledgements
+    References
+    appendices
+
+Title Page
+Team members, photo of most up to date robot etc...
+
+Abstract
+Concentrate on the 'why', not the 'what' (That is for the summary)
+Scope, motivation, succinct method if vital, results, meaning of the results, conclusions and benefits.
+Abandonning the idea of Bamboo, too difficult/ expensive/ hard to find...
+
+May be easiest to do at the end, once you can decide what is important.
+
+Introduction
+Goal
+Restrictions/ specs (height of gate, width of maze etc)
+SMART outcomes that build together to meet the aim (Specific, Measurable, Attainable, Relevant and Timely) <-- so far we have been bad with specific, can mention the intention to change this
+
+Background
+
+provide instruction on the subjects that the reader needs to know in order to understand the current work
+previous experince
+write it so someone with no previous knowledge could understand at least the concepts
+
+Methods
+
+Biggest Section atm
+Mainly Software and Hardware (also mention Networking and Documention)
+Clear diagrams, pseudocode, details of datasets, equipment 
+diagrams and pics of the robot
+pics of the maze 
+comments and outline for pseudocode
+All presumptions and assumptions need to be stated (maze walls, no loops etc)!
+
+
+Results //PLEASE ADD TO THESE
+
+Hardware
+There is a prototype camera mount that has been 3D printed, we did have a cardboard one for a day. (angle may be changed to read as close to the robot as possible)
+We have decided on our sensors and equipement (camera, mid range sensors (not relevant until we get to the maze))
+
+Software
+Wheels turning, with some relation to the colour change
+Error with /0 fixed with an if code.
+Gate code should be working.
+Camera is working
+Not detecting the left hand side of image as there is an error we haven't fixed regarding negatives.
+
+We haven't got this far, but we are planning on:
+Making the robot hug the lefthand side of the white line all the time, and work on the maze aspect.
+
+Networking
+Gate should be opening now
+We have been sshing into the pi
+
+
+Discussion
+
+Do what you can.
+What we intend to do for the rest of the program, where we expect errors.
+Here is where you explore the position taken based on the results and the background information from past studies. 
+Alternatives and uncertainty are described.
+It has similarities to a debate where both sides of the argument of presented, e.g. why might the position taken be incorrect? 
+It is the best place to demonstrate understanding, mastery and insight into the subject.
+
+
+Conclusion
+
+(generally not discussion and conclusion unless a very short report) 
+What was found, Why it is important and its meaning. Benefits may also be included. 
+!!!It is not:
+
+    A pure summary, e.g. we did this and then that and this. An argument (this was the discussion) although it can be stated that the results were inconclusive.
+    A place for new information
+    Self Reflection (e.g. "I learned how to use Matlab and really enjoyed it..."), which may belong in an appendix,but much better on a blog.
+
+Future Work
+This is not a place for what should have been done already, but ran out of time. 
+Instead, it identies interesting follow on work.
+For now the rest of the project, but for the final one the extension to 110?
+
+References //CHECK THE DOCUMENT ON GITHUB
+Course notes
+Elf's wiki
+
+Appendices
+For example, tables of values that are summarised in a graph in the main sections. 
+Details of experimental setup where an overview is given in the method section. 
+Data sheets of important components. 
+Self-reflection Hint:it is good to take a step back from any task and analyse your interaction with it. // be careful with not too much of this
+
+Additional Tips
+Tip 1. Imagine a prospective employer will read this work - the report will reflect your professionalism. 
+Care is needed with layout, content and proofreading. It also creates a good vibe about the content.
+
+Do not use first person in your writing, i.e. 'I' or ' the author'. 
+Increasingly, it is becoming acceptable to use 'we', but I would recommend it is recommended to practise writing without the use of even this 'second person'. 
+Thus, a sentence such as 'I thought the experiments were good as the results were as intended' becomes 'it was considered that the experimental results supported the position taken on the effectiveness of PID controllers in industry as an initially unstable system was stabilised'.
+Academic English is very formal as it seeks to avoid ambiguities.
