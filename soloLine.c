@@ -24,9 +24,14 @@ int main (){
     double leftMotor;
     int whiteTotal;
     int numberOfWhite;
+    int counter = 0;
     
     while(true){
         //initialise values
+        if (counter >= 100) { // main exit loop command
+		printf("%s\n", "100 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
+		break;
+	}
         whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
         numberOfWhite = 0;//running total of the number of white pixels
         
@@ -42,7 +47,7 @@ int main (){
             //resolution of image is 320x240
             c = get_pixel(i,200,3);
 
-            if(c<150){
+            if(c<160){ // 320/2 ie. if (c < half)
                 c = 0;  //Black pixel
             }
             else{
@@ -51,28 +56,22 @@ int main (){
             }
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
         }
-        if (numberOfWhite == 0){ // this should never happen for first 3 quadrants - useful for debugging, though
+	
+        if (numberOfWhite == 0){ // prints debug msg & restarts loop if no white
        		printf("%s\n", "No white detected");
        		break; // should become 'cut to maze method' later, will just make a 'motorspeed = 0' method for now
+       		counter++;
        	}
         
-        if ((whiteTotal >= 0) && (numberOfWhite >= 1)) { // Arthur's adjustment, adjusted a little more
-        // && number of white clause is so that it doesn't try to divide by 0. I think this was our bug
-        // Needs more review - we may still have no way to track when it's left of center
-       	// might actually still be broken if we can't get exact center values or left values to print
-
+        if (numberOfWhite >= 1) { // no dividing by 0
         	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
-        	
 		////////////////////////////////////////////////////////////
 		printf("%d\n", errorSignal); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
-        } // likely else if statement for negative values to go here - commented out because tired & may not work
-         else if ((whiteTotal < 0) && (numberOfWhite >= 1)) {
-        	errorSignal = whiteTotal/numberOfWhite;
-        	printf("%d", errorSignal);
-        } // note - all this is super redundant if the bug is just to do with #numberOfWhite, & if its not this may not work
-        // if it works, delete this and change the first method (delete the whiteTotal portion, make condition "if numberOfWhite != 0"
-        // or just >0 since it should never go negative
+		counter++;
+
+        } // end of nested loop
+        
         
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
@@ -84,13 +83,13 @@ int main (){
         set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
 
-    }
-
-    // closing method once loop is exited - makes motors stop
-    // should run if the camera ever detects 'no white'
+    } // end of primary loop
+    // stop motors
     set_motor(1, 0);
     set_motor(2, 0);
-    printf("%s", "\nProgram fin");
+    printf("%s", "\nProgram fin"); // debugging - program complete msg
+
+}
 
 return 0;
 }
