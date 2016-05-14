@@ -1,0 +1,25 @@
+###Hardware Development
+
+##Concepting
+
+ - Wheels centralised
+ - Camera angle 45 degrees
+ - Pi & battery centred over wheels
+ - Short sensors angled at 45 degrees
+ - Medium sensor beneath camera facing ahead
+ - Pi fixed horizontally
+ - Made from bamboo (sustainable/recyclable)
+ 
+##Development
+
+ - Wheels nearer to front to minimise data lost when turning
+ - Camera angled and positioned so the bottom line of pixels is as close to the axle line as possible
+ - Camera must be high enough so the top several lines of pixels are 20cm away from the wheels
+ - Short range sensors too short range, swap to medium range
+ - Medium range sensor too short range to detect wall, change method to camera (wall/floor color change identification)
+ - Rear wheel height must be accounted for for camera angle
+ - New rear wheel must be used to minimise friction
+ - Pi to be held vertically above the battery as near the front axle as possible
+ - Chassis base plate to be replaced with custom version
+ - Bamboo no longer used unless time permits
+ 
