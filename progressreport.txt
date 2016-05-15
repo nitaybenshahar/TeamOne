@@ -63,7 +63,7 @@ Wheels turning, with some relation to the colour change
 Error with /0 fixed with an if code.
 Gate code should be working.
 Camera is working
-Not detecting the left hand side of image as there is an error we haven't fixed regarding negatives.
+Not detecting the left hand side of image as there is an error we haven't fixed regarding negatives. // believe this is actually fixed as the wheels were turning both ways. No idea why though! - Dash
 
 We haven't got this far, but we are planning on:
 Making the robot hug the lefthand side of the white line all the time, and work on the maze aspect.
