@@ -18,6 +18,12 @@ int main(){
     float ki = 0;//constant of integral control, not used at the moment
     float kd = 0;//constant of derivative control, not used at the moment
 
+    //Test: try changing the variable types to 'signed long' instead of 'double', commented out for now
+    //signed long errorSignal;
+    //signed long prop;
+    //signed long rightMotor;
+    //signed long leftMotor;
+
     double errorSignal;//the total distance away from the line
     double prop;//scaled error signal of proportionality, scaled for motor to handle
     // moved all these so they initialised here - initialising in a loop might cause weird memory stuff? iuno
