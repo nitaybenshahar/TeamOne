@@ -16,7 +16,7 @@ int main(){
     char c; //stores whiteness of pixel
     float kp = 1; //constant of proportionality control
     float ki = 0;//constant of integral control, not used at the moment
-    float kd = 0;//constant of derivative control, not used at the moment
+    float kd = 0.5;//constant of derivative control, not used at the moment
 
     //Test: try changing the variable types to 'signed long' instead of 'double', commented out for now
     //signed long errorSignal;
@@ -31,6 +31,9 @@ int main(){
     double leftMotor;
     int whiteTotal;
     int numberOfWhite;
+    
+    //int current_error;
+    //int error_diff;
 
     while(true){
         //initialise values
@@ -80,6 +83,12 @@ int main(){
         } // note - all this is super redundant if the bug is just to do with #numberOfWhite, & if its not this may not work
         // if it works, delete this and change the first method (delete the whiteTotal portion, make condition "if numberOfWhite != 0"
         // or just >0 since it should never go negative
+        
+        //error_dif = current_error - errorSignal;
+        //derivative_signal = (error_diff/errorSignal)*kd
+        //errorSignal = current_error;
+        
+        //need to find current error
         
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
