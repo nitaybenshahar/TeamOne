@@ -18,6 +18,8 @@ int main(){
     float ki = 0;//constant of integral control, not used at the moment
     float kd = 0.5;//constant of derivative control, not used at the moment
 
+    // networking stuff in here, once tested if works.
+    
     //Test: try changing the variable types to 'signed long' instead of 'double', commented out for now
     //signed long errorSignal;
     //signed long prop;
@@ -26,7 +28,7 @@ int main(){
 
     double errorSignal;//the total distance away from the line
     double prop;//scaled error signal of proportionality, scaled for motor to handle
-    // moved all these so they initialised here - initialising in a loop might cause weird memory stuff? iuno
+    // moved all these so they initialised here - initialising in a loop might cause weird memory stuff?
     double rightMotor;
     double leftMotor;
     int whiteTotal;
@@ -76,11 +78,11 @@ int main(){
 		////////////////////////////////////////////////////////////
 		printf("%d\n", errorSignal); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
-        } // likely else if statement for negative values to go here - commented out because tired & may not work
+        } // likely else if statement for negative values to go here - need to test to make sure it's working
          else if ((whiteTotal < 0) && (numberOfWhite >= 1)) {
         	errorSignal = whiteTotal/numberOfWhite;
         	printf("%d", errorSignal);
-        } // note - all this is super redundant if the bug is just to do with #numberOfWhite, & if its not this may not work
+        } // note - all this is super redundant if the bug is just to do with #numberOfWhite, & if it's not this may not work
         // if it works, delete this and change the first method (delete the whiteTotal portion, make condition "if numberOfWhite != 0"
         // or just >0 since it should never go negative
         
