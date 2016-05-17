@@ -10,7 +10,7 @@ int main (){
     
     init(1);
     
-    connect_to_server("___.___._._", 1024);
+    connect_to_server("130.195.6.196", 1024);
     
     send_to_server("please");
     
