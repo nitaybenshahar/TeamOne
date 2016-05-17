@@ -103,6 +103,9 @@ int main(){
     }
     // closing method once loop is exited - makes motors stop
     // should run if the camera ever detects 'no white'
+    //ideally should be making motors move directly backwards until they hit the white line again.
+    //so set_motor(1, -rightMotor); and set_motor(2, -leftMotor);
+    //in comments as I'm no tusre how to make it revert back to normal code once back on line, perhaps while(false)?
    set_motor(1, 0);
    set_motor(2, 0);
     printf("%s", "\nProgram fin");
