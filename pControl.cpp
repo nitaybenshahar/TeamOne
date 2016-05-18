@@ -8,6 +8,9 @@ extern "C" int Sleep(int sec, int usec);
 extern "C" int set_motor(int motor , int speed );
 extern "C" int display_picture(int delay_sec,int delay_usec);
 //Networks, sending signal
+/*extern "C" int connect_to_server( char server_addr[15],int port);
+extern "C" int send_to_server(char message[24]);
+extern "C" int receive_from_server(char message[24]);*/
 
 int main(){
     //This sets up the RPi hardware 
@@ -108,7 +111,13 @@ int main(){
     // should run if the camera ever detects 'no white'
     //ideally should be making motors move directly backwards until they hit the white line again.
     //so set_motor(1, -rightMotor); and set_motor(2, -leftMotor);
-    //in comments as I'm no tusre how to make it revert back to normal code once back on line, perhaps while(false)?
+    //in comments as I'm not sure how to make it revert back to normal code once back on line, perhaps while(false)?
+    /*
+    while(false){
+        set_motor(1,-rightMotor);
+        set_motor(2, -leftMotor);
+    }   <-- maybe???
+    */
    set_motor(1, 0);
    set_motor(2, 0);
     printf("%s", "\nProgram fin");
