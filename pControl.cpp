@@ -90,7 +90,8 @@ int main(){
         //derivative_signal = (error_diff/errorSignal)*kd
         //errorSignal = current_error;
         
-        //need to find current error
+        //error Signal is the previous error and so we  perhaps need more if statements to find the current error.
+        //from there we can calculate the derivative signal. Unsure on how to do that at the moment
         
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
