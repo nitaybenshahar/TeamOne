@@ -1,6 +1,6 @@
 #Weekly Goals
 
-Gate Open Working
+~~Gate Open Working~~ Completed
 
 Single Line Follow Working (Derivative & Integral methods included)
 
