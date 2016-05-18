@@ -53,3 +53,10 @@ Today we (Dash, Nitay, Kate and Chintan) got the camera to record the image at r
 
 Patrick and Matt worked on making a 3D model of the chassis that can be 3D printed.
 
+Thursday meeting - we wrote out bullet points for each heading for the progress report. We then tried to test the networking code and it failed miserably for reasons we aren't sure of. We did get the robots wheels moving relative to a white line though.
+
+18/05/16
+
+Printing of the chassis will be done by the end of today, leaving only the camera and sensor mounts to be printed.
+Meetings will be on Wednesday AND Thursday this week to ensure everyone can make one.
+Code for opening the gate was completed but not tested.
