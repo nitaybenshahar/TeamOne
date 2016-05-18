@@ -124,7 +124,6 @@ int main(){
         //	Sleep(0,100000); 
         //error_dif = current_error - prevous_error;
         //derivative_signal = (error_diff/errorSignal)*kd Not sure what you actually divide by
-        //error_dif = current_error - errorSignal;
         //previous_error = current_error;
         // rightMotor and leftMotor + derivative_signal;
 	/////////////////////////////////////////
