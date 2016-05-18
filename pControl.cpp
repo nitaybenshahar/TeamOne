@@ -46,8 +46,12 @@ int main(){
     int whiteTotal;
     int numberOfWhite;
     
-    //int current_error;
+    ///////////////////////
+    //Derivative
+    //int current_error = 0;
+    //int previous_error;
     //int error_diff;
+    //////////////////////
 
     while(true){
         //initialise values
@@ -112,12 +116,18 @@ int main(){
         // if it works, delete this and change the first method (delete the whiteTotal portion, make condition "if numberOfWhite != 0"
         // or just >0 since it should never go negative
         
+        ////////////////////////////////////
+        //Derivative
+        //for(int i=0; i<320; i++){ Pretty much was we had above but since we have proportional error could we combine 
+        //	whiteTotal = whiteTotal + (i-160)*c;              this to what we have above?
+        //	current error = whiteTotal;
+        //	Sleep(0,100000); 
+        //error_dif = current_error - prevous_error;
+        //derivative_signal = (error_diff/errorSignal)*kd Not sure what you actually divide by
         //error_dif = current_error - errorSignal;
-        //derivative_signal = (error_diff/errorSignal)*kd
-        //errorSignal = current_error;
-        
-        //error Signal is the previous error and so we  perhaps need more if statements to find the current error.
-        //from there we can calculate the derivative signal. Unsure on how to do that at the moment
+        //previous_error = current_error;
+        // rightMotor and leftMotor + derivative_signal;
+	/////////////////////////////////////////
         
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
