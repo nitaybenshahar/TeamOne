@@ -21,13 +21,13 @@ int main(){
     float ki = 0;//constant of integral control, not used at the moment
     float kd = 0.5;//constant of derivative control, not used at the moment
     
-   //connects to server with the ip address 192.168.1.2
+   //connects to server with the ip address 130.195.6.196, but opens then closes super quick, need to fix that.
    connect_to_server("130.195.6.196", 1024);
    //sends a message to the connected server
    send_to_server("Hello server");
    //receives message from the connected server
    char message[24];
-   receive_from_server(message); //this may be buggy!
+   receive_from_server(message);
    printf("%s", message);
     
     //Test: try changing the variable types to 'signed long' instead of 'double', commented out for now
@@ -120,10 +120,10 @@ int main(){
     //so set_motor(1, -rightMotor); and set_motor(2, -leftMotor);
     //in comments as I'm not sure how to make it revert back to normal code once back on line, perhaps while(false)?
     /*
-    while(false){
+    while(false){ or maybe if(numberOfWhite = 0){
         set_motor(1,-rightMotor);
         set_motor(2, -leftMotor);
-    }   <-- maybe???
+    }   <-- I have no idea if this would actually work in making the pi pay attention to whether it has got back to the white line or not.
     */
    set_motor(1, 0);
    set_motor(2, 0);
