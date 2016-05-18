@@ -7,7 +7,7 @@ extern "C" char get_pixel(int row,int col,int colour);
 extern "C" int Sleep(int sec, int usec);
 extern "C" int set_motor(int motor , int speed );
 extern "C" int display_picture(int delay_sec,int delay_usec);
-//networking stuff
+//networking stuff - now working!
 extern "C" int connect_to_server( char server_addr[15], int port);
 extern "C" int send_to_server( char message[24]);
 extern "C" int receive_from_server( char message[24]);
@@ -22,6 +22,8 @@ int main(){
     float kd = 0.5;//constant of derivative control, not used at the moment
     
    //connects to server with the ip address 130.195.6.196, but opens then closes super quick, need to fix that.
+   //Could use the camera to detect the gate and while it sees it ask for it to be open?
+   //need to actually check first though if it is too fast for Bambi to get through.
    connect_to_server("130.195.6.196", 1024);
    //sends a message to the connected server
    send_to_server("Hello server");
@@ -58,7 +60,11 @@ int main(){
         display_picture(2,0); //Display picture for debugging purposes
         ////////////////////////////////////////////////////////////////
 
-        for(int i=0; i<320; i++){
+        for(int i=0; i<320; i++){ 
+            //Some ideas for hugging the left hand side of the white line:
+            //using an if statement which breaks after a white pixel is found, so only one position is stored and use that as we are usinf whiteTotal now.
+            //could also use a for statement if really wanted and make it that it is for whiteTotal < 1
+            //GET THIS WORKING ASAP, as it will save a lot of coding relating to intersections.
         	
             //get pixel "whiteness"
             //resolution of image is 320x240
@@ -75,7 +81,16 @@ int main(){
         }
         if (numberOfWhite == 0){ // this should never happen for first 3 quadrants - useful for debugging, though
        		printf("%s\n", "No white detected");
-       		break; // should become 'cut to maze method' later, will just make a 'motorspeed = 0' method for now
+       		break; 
+       		//should be an if statement using the sensors to see if there are walls on BOTH sides, can't be just one as it could just be passing by a wall
+       		//and if there are then cut to maze method. If not then should break so the motors reverse to find the white line again.
+       		//idea:
+       		//if loop detecting walls using sensors
+	       		//if no left wall turn left,
+	       		//else if no wall ahead go forward,
+	       		//else if no wall to right, go right,
+	       		//else turn back.
+	       	//else, break
        	}
         
         if ((whiteTotal >= 0) && (numberOfWhite >= 1)) { // Arthur's adjustment, adjusted a little more
@@ -84,6 +99,7 @@ int main(){
        	// might actually still be broken if we can't get exact center values or left values to print
 
         	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
+        	//would be the far left of the line ideally
         	
 		////////////////////////////////////////////////////////////
 		printf("%d\n", errorSignal); //Print error signal for Debugging purposes
