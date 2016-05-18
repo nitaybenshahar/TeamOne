@@ -7,10 +7,10 @@ extern "C" char get_pixel(int row,int col,int colour);
 extern "C" int Sleep(int sec, int usec);
 extern "C" int set_motor(int motor , int speed );
 extern "C" int display_picture(int delay_sec,int delay_usec);
-//Networks, sending signal
-/*extern "C" int connect_to_server( char server_addr[15],int port);
-extern "C" int send_to_server(char message[24]);
-extern "C" int receive_from_server(char message[24]);*/
+//networking stuff
+extern "C" int connect_to_server( char server_addr[15], int port);
+extern "C" int send_to_server( char message[24]);
+extern "C" int receive_from_server( char message[24]);
 
 int main(){
     //This sets up the RPi hardware 
@@ -20,8 +20,15 @@ int main(){
     float kp = 1; //constant of proportionality control
     float ki = 0;//constant of integral control, not used at the moment
     float kd = 0.5;//constant of derivative control, not used at the moment
-
-    // networking stuff in here, once tested if works.
+    
+   //connects to server with the ip address 192.168.1.2
+   connect_to_server("192.168.1.2", 1024);
+   //sends a message to the connected server
+   send_to_server("Hello server");
+   //receives message from the connected server
+   char message[24];
+   receive_from_server(message); //this may be buggy!
+   printf("%s", message);
     
     //Test: try changing the variable types to 'signed long' instead of 'double', commented out for now
     //signed long errorSignal;
