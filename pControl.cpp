@@ -94,8 +94,8 @@ int main(){
 	       		//else if no wall ahead go forward,
 	       		//else if no wall to right, go right,
 	       		//else turn back.
-	       	//else, break
-       	}
+	       	//else, break/ this is where turn back could be implemented rather than at the end.
+	   }
         
         if ((whiteTotal >= 0) && (numberOfWhite >= 1)) { // Arthur's adjustment, adjusted a little more
         // && number of white clause is so that it doesn't try to divide by 0. I think this was our bug
@@ -148,6 +148,7 @@ int main(){
     //ideally should be making motors move directly backwards until they hit the white line again.
     //so set_motor(1, -rightMotor); and set_motor(2, -leftMotor);
     //in comments as I'm not sure how to make it revert back to normal code once back on line, perhaps while(false)?
+    //This could also go up top, where the loop for whiteTotal<=1. Have aan if it gets to one then follow, if not then do this:
     /*
     while(false){ or maybe if(numberOfWhite = 0){
         set_motor(1,-rightMotor);
