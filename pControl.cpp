@@ -150,8 +150,8 @@ int main(){
         set_motor(2, -leftMotor);
     }   <-- I have no idea if this would actually work in making the pi pay attention to whether it has got back to the white line or not.
     */
-   set_motor(1, 0);
-   set_motor(2, 0);
+   set_motor(1, 0); //I'm pretty sure that we never need to make the robot stop as it doesn't need to know when it gets to the end, it just needs to get there.
+   set_motor(2, 0); //So currently this is just here so that in testing our robot doesn't run forever.
     printf("%s", "\nProgram fin");
     return 0;
 }
