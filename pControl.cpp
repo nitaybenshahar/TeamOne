@@ -127,6 +127,10 @@ int main(){
         //previous_error = current_error;
         // rightMotor and leftMotor + derivative_signal;
 	/////////////////////////////////////////
+	
+	//Something needs to be added in here for if Bambi is on the line, as currently he will stop.
+	//Maybe an if(-10<numberOfWhite<10){
+		//set both motors to full speed ahead	}
         
         prop = (errorSignal*127/160);//proportional control
         //the *127/160 scales the value so the motor can handle it
