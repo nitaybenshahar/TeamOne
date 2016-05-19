@@ -1,3 +1,4 @@
+
 # include <stdio.h>
 # include <time.h>
 
@@ -17,8 +18,10 @@ int main (){
     float ki = 0;
     float kd = 0;
     
-    double errorSignal;
+    double currentError = 0;
+    double prevError = 0;
     double prop;
+    double errorTotal;
     
     double rightMotor;
     double leftMotor;
@@ -34,7 +37,7 @@ int main (){
 	}
         whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
         numberOfWhite = 0;//running total of the number of white pixels
-        
+       
         
         take_picture();
         ////////////////////////////////////////////////////////////////
@@ -64,24 +67,38 @@ int main (){
        	}
         
         if (numberOfWhite >= 1) { // no dividing by 0
-        	errorSignal = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
+        	currentError = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
 		////////////////////////////////////////////////////////////
-		printf("%d\n", errorSignal); //Print error signal for Debugging purposes
+		printf("%d\n", currentError); //Print error signal for Debugging purposes
 		////////////////////////////////////////////////////////////
 		counter++;
+		
+		Sleep(0,1);
+
 
         } // end of nested loop
         
+        derivativeSignal = (currentError-prev_error/0.1)*kd;
+	printf("Derivative signal is: %d", derivative_signal );
+	
+	finalSignal = (currentError+derivativeSignal);
         
-        prop = (errorSignal*127/160);//proportional control
+        
+        adjustment = (finalSignal*127/160);//proportional signal 
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
+        
+	
+	errorTotal = errorTotal + currentError;
+	totalCount = totalCount + 1;
 
         rightMotor = 127-kp*prop;
         leftMotor = -(127+kp*prop);//negative so motors turn in the same direction
 
         set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
+        
+	prev_error = current_error;
 
     } // end of primary loop
     // stop motors
