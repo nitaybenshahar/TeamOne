@@ -14,9 +14,10 @@ int main (){
     init(1);
     
     char c;
-    float kp = 1;
-    float ki = 0;
-    float kd = 0;
+    // keep the 'k' constants summing to 1 when testing - they're there for weighting, make it simple
+    float kp = 0.6;
+    float ki = 0.3;
+    float kd = 0.1;
     
     double currentError = 0;
     double prevError = 0;
@@ -31,8 +32,8 @@ int main (){
     
     while(true){
         //initialise values
-        if (counter >= 100) { // main exit loop command
-		printf("%s\n", "100 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
+        if (counter >= 200) { // main exit loop command
+		printf("%s\n", "200 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
 		break;
 	}
         whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
@@ -40,9 +41,7 @@ int main (){
        
         
         take_picture();
-        ////////////////////////////////////////////////////////////////
-        display_picture(2,0); //Display picture for debugging purposes
-        ////////////////////////////////////////////////////////////////
+        //display_picture(2,0); //Display picture for debugging purposes
 
         for(int i=0; i<320; i++){
         	
@@ -59,18 +58,31 @@ int main (){
             }
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
         }
-	
-        if (numberOfWhite == 0){ // prints debug msg & restarts loop if no white
-       		printf("%s\n", "No white detected");
-       		break; // should become 'cut to maze method' later, will just make a 'motorspeed = 0' method for now
-       		counter++;
-       	}
+	// intersection navigation methods
+        if (numberOfWhite = 0) { // go left for a while
+		set_motor(1, -127); 
+        	set_motor(2, 127);
+		sleep(2,0); // adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
+
+	} else if ((numberOfWhite > 40) && (errorsignal <= 0)) { // should go left at any crossroads 
+		set_motor(1, -127); 
+        	set_motor(2, 127);
+		sleep(1,0);// hard left for sleep duration
+
+	} else if ((numberOfWhite > 40) && (futureNumberOfWhite > 0)) { // else go straight if line continues
+		set_motor(1, 127); 
+        	set_motor(2, 127);
+		sleep(2,0); // may be too long; adjust
+	} else if ((numberOfWhite > 40) && (errorsignal > 0)) { // else turn right if line ONLY goes right
+		rightMotor = 127;
+		leftMotor = -127;
+		sleep(1,0); // hard right for sleep duration
+	}
+	// end of navigation method
         
         if (numberOfWhite >= 1) { // no dividing by 0
         	currentError = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
-		////////////////////////////////////////////////////////////
-		printf("%d\n", currentError); //Print error signal for Debugging purposes
-		////////////////////////////////////////////////////////////
+		//printf("%d\n", currentError); //Print error signal for Debugging purposes
 		counter++;
 		
 		Sleep(0,100000);
@@ -83,11 +95,11 @@ int main (){
         propSignal = currentError*kp;
         
         derivativeSignal = (currentError-prev_error/0.1)*kd;
-	printf("Derivative signal is: %d", derivative_signal );
+	// printf("Derivative signal is: %d", derivative_signal);
 	
-	intSignal = (errorTotal/totalCount)*ki; // integral signal; running average
+	inteSignal = (errorTotal/totalCount)*ki; // integral signal; running average
 	
-	finalSignal = (currentError+derivativeSignal);
+	finalSignal = (currentError+derivativeSignal+inteSignal); // the cumulative signal result
         
         adjustment = (finalSignal*127/160); // the actual value for the motors to use
         //the *127/160 scales the value so the motor can handle it
@@ -107,7 +119,7 @@ int main (){
     // stop motors
     set_motor(1, 0);
     set_motor(2, 0);
-    printf("%s", "\nProgram fin"); // debugging - program complete msg
+    //printf("%s", "\nProgram fin"); // debugging - program complete msg
 
 }
 
