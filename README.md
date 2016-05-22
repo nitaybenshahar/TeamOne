@@ -44,7 +44,7 @@ Nital Special Meeting: Friday between 0900 and 1200
 
 **Potential conflicts:**
 
-Dash - ~~5 papers~~ No excuses... unless my dentist murders me
+Dash - ~~5 papers~~ No excuses
 
 Most - Away during break
 
