@@ -73,27 +73,30 @@ int main (){
 		////////////////////////////////////////////////////////////
 		counter++;
 		
-		Sleep(0,1);
+		Sleep(0,100000);
 
 
-        } // end of nested loop
+        } 
+        errorTotal = errorTotal + currentError;
+	totalCount = totalCount + 1;
+        
+        propSignal = currentError*kp;
         
         derivativeSignal = (currentError-prev_error/0.1)*kd;
 	printf("Derivative signal is: %d", derivative_signal );
 	
+	intSignal = (errorTotal/totalCount)*ki; // integral signal; running average
+	
 	finalSignal = (currentError+derivativeSignal);
         
-        
-        adjustment = (finalSignal*127/160);//proportional signal 
+        adjustment = (finalSignal*127/160); // the actual value for the motors to use
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
 	
-	errorTotal = errorTotal + currentError;
-	totalCount = totalCount + 1;
 
-        rightMotor = 127-kp*prop;
-        leftMotor = -(127+kp*prop);//negative so motors turn in the same direction
+        rightMotor = 127-adjustment;
+        leftMotor = -(127+adjustment);//negative so motors turn in the same direction
 
         set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
