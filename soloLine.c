@@ -105,10 +105,13 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
-	
-
-        rightMotor = 127-adjustment;
-        leftMotor = -(127+adjustment);//negative so motors turn in the same direction
+        if (-10 < propSignal < 10) { // adjust as necessary
+        	rightMotor = 127;
+        	leftMotor = 127;
+        } else {
+        	rightMotor = 127-adjustment;
+        	leftMotor = -(127+adjustment);//negative so motors turn in the same direction
+        }
 
         set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
