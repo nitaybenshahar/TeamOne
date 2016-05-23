@@ -15,24 +15,32 @@ int main (){
     
     char c;
     char cFuture;
-    // keep the 'k' constants summing to 1 when testing - they're there for weighting, make it simple
+    // keep the 'k' constants summing to 1 when testing - they're there for weighting, let's keep it simple
     float kp = 0.6;
     float ki = 0.3;
     float kd = 0.1;
     
     double currentError = 0;
     double prevError = 0;
-    double prop;
+    
+    double propSignal;
+    double derivativeSignal;
+    double inteSignal;
+    double finalSignal;
+    double adjustment;
+    
     double errorTotal;
     
     double rightMotor;
     double leftMotor;
+    
     int whiteTotal;
     int numberOfWhite;
+    int futureNumberOfWhite;
+    int futureWhiteTotal;
     int counter = 0;
     
     while(true){
-        //initialise values
         if (counter >= 200) { // main exit loop command
 		printf("%s\n", "200 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
 		break;
@@ -77,7 +85,7 @@ int main (){
         	set_motor(2, 127);
 		sleep(2,0); // adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
 
-	} else if ((numberOfWhite > 40) && (errorsignal <= 0)) { // should go left at any crossroads 
+	} else if ((numberOfWhite > 40) && (propSignal <= 0)) { // should go left at any crossroads 
 		set_motor(1, -127); 
         	set_motor(2, 127);
 		sleep(1,0);// hard left for sleep duration
@@ -86,7 +94,7 @@ int main (){
 		set_motor(1, 127); 
         	set_motor(2, 127);
 		sleep(2,0); // may be too long; adjust
-	} else if ((numberOfWhite > 40) && (errorsignal > 0)) { // else turn right if line ONLY goes right
+	} else if ((numberOfWhite > 40) && (propSignal > 0)) { // else turn right if line ONLY goes right
 		rightMotor = 127;
 		leftMotor = -127;
 		sleep(1,0); // hard right for sleep duration
