@@ -21,7 +21,7 @@ int main (){
     float kd = 0.1;
     
     double currentError = 0;
-    double prevError = 0;
+    double prev_error = 0;
     
     double propSignal;
     double derivativeSignal;
@@ -68,7 +68,7 @@ int main (){
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
             
             // the 'check ahead' method
-            cFuture = get_pixel(i, 230, 3) // currently close to the initial pixel read – may work better if they’re further apart 
+            cFuture = get_pixel(i, 230, 3); // currently close to the initial pixel read – may work better if they’re further apart 
             // – adjust with testing
             if(c<160){
                 cFuture = 0;  //Black pixel
@@ -77,27 +77,27 @@ int main (){
                 cFuture = 1;   //white pixel
                 futureNumberOfWhite++;
             }
-            whiteFutureTotal= whiteFutureTotal + (i-160)*c; 
+            double whiteFutureTotal= whiteFutureTotal + (i-160)*c; 
         }
 	// intersection navigation methods
-        if (numberOfWhite = 0) { // go left for a while
+        if (numberOfWhite == 0) { // go left for a while
 		set_motor(1, -127); 
         	set_motor(2, 127);
-		sleep(2,0); // adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
+		Sleep(2,0); // adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
 
 	} else if ((numberOfWhite > 40) && (propSignal <= 0)) { // should go left at any crossroads 
 		set_motor(1, -127); 
         	set_motor(2, 127);
-		sleep(1,0);// hard left for sleep duration
+		Sleep(1,0);// hard left for sleep duration
 
 	} else if ((numberOfWhite > 40) && (futureNumberOfWhite > 0)) { // else go straight if line continues
 		set_motor(1, 127); 
         	set_motor(2, 127);
-		sleep(2,0); // may be too long; adjust
+		Sleep(2,0); // may be too long; adjust
 	} else if ((numberOfWhite > 40) && (propSignal > 0)) { // else turn right if line ONLY goes right
 		rightMotor = 127;
 		leftMotor = -127;
-		sleep(1,0); // hard right for sleep duration
+		Sleep(1,0); // hard right for sleep duration
 	}
 	// end of navigation method
         
@@ -126,7 +126,7 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
-        if (-10 < propSignal < 10) { // adjust as necessary
+        if (propSignal<-10 && propSignal < 10) { // adjust as necessary
         	rightMotor = 127;
         	leftMotor = 127;
         } else {
@@ -144,8 +144,5 @@ int main (){
     set_motor(1, 0);
     set_motor(2, 0);
     //printf("%s", "\nProgram fin"); // debugging - program complete msg
-
-}
-
 return 0;
 }
