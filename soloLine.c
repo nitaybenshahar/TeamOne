@@ -126,7 +126,7 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
-        if (propSignal<-10 && propSignal < 10) { // adjust as necessary
+        if (propSignal>-10 && propSignal < 10) { // adjust as necessary
         	rightMotor = 127;
         	leftMotor = 127;
         } else {
