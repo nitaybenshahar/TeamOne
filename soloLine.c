@@ -14,6 +14,7 @@ int main (){
     init(1);
     
     char c;
+    char cFuture;
     // keep the 'k' constants summing to 1 when testing - they're there for weighting, make it simple
     float kp = 0.6;
     float ki = 0.3;
@@ -57,6 +58,18 @@ int main (){
                 numberOfWhite++;
             }
             whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
+            
+            // the 'check ahead' method
+            cFuture = get_pixel(i, 230, 3) // currently close to the initial pixel read – may work better if they’re further apart 
+            // – adjust with testing
+            if(c<160){
+                cFuture = 0;  //Black pixel
+            }
+            else{
+                cFuture = 1;   //white pixel
+                futureNumberOfWhite++;
+            }
+            whiteFutureTotal= whiteFutureTotal + (i-160)*c; 
         }
 	// intersection navigation methods
         if (numberOfWhite = 0) { // go left for a while
