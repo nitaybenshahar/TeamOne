@@ -40,14 +40,13 @@ int main(){
 
 	    c = get_pixel(340,i*45, 3);
  	    if(c>150){                                    //change white threshold
-            whiteWall++;
+            	whiteWall++;
 	    }
-    }
+    	}
 
-	if(whiteWall <4){                                 //Change threshold if theres problems
+	if(whiteWall < 4){                                 //Change threshold if theres problems
 	    forwards = true;
 	}
-
 
 	if(leftSensor>THRESHOLD){
 	     left = true;
@@ -57,15 +56,12 @@ int main(){
 	}
 
 	if(right){
-//motor 1 is right motor (i think)
-	    set_motor(1, 10);
-	    set_motor(2, 100);               //Change thresholds
+
+	    set_motor(1, 10);//right motor
+	    set_motor(2, 100);//left motor               //Change thresholds
 	    Sleep(2,0);
 	    set_motor(1,0);
 	    set_motor(2,0);
-
-
-
 	}
 	else if(forwards){//stay in the center of the maze
 
@@ -74,15 +70,15 @@ int main(){
 	    leftMotor = (rightSensor/totalWidth)*50;
 
 	    Sleep(0,50000);
-//rotate back to centre
+	    //rotate back to centre
 	    leftMotor = (leftSensor/totalWidth)*50;      //vhange threshold
 	    rightMotor = (rightSensor/totalWidth)*50;
 	    Sleep(0,50000);
 
 	}
 	else if(left){
-	    set_motor(1, 100);
-	    set_motor(2, 10);               //Change thresholds
+	    set_motor(1, 100);//right motor
+	    set_motor(2, 10);//left motor               //Change thresholds
 	    Sleep(2,0);
 	    set_motor(1,0);
 	    set_motor(2,0);
@@ -90,7 +86,7 @@ int main(){
 	else //pop a u turn
 	{
 	    set_motor(1, -50);
-	    set_motor(2, 60);               //Change thresholds
+	    set_motor(2, 60);//bigger so the back doesn't hit the wall               //Change thresholds
 	    Sleep(2,0);
 	    set_motor(1,0);
 	    set_motor(2,0);
@@ -98,7 +94,6 @@ int main(){
 	}
 
         Sleep(0,500000);
-
     }
     return 0;
 }
