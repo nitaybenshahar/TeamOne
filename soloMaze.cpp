@@ -16,7 +16,9 @@ int main(){
     int rightSensor;
     char c;
     int whiteWall;
-    bool left, right, forwards;
+    bool noLeftWall, 
+    bool noRightWall, 
+    bool noWallAhead;
     int THRESHOLD = 200;
     int totalWidth;
     double leftMotor, rightMotor;
@@ -26,9 +28,9 @@ int main(){
 	//initialise
 	whiteWall = 0;
         //returns true if there isnt a wall
-	left =false;
-	right = false;
-	forwards = false;
+	noLeftWall =false;
+	noRightWall = false;
+	noWallAhead = false;
 
 	//get data from sensors
         leftSensor = read_analog(0);
@@ -45,17 +47,17 @@ int main(){
     	}
 
 	if(whiteWall < 4){                                 //Change threshold if theres problems
-	    forwards = true;
+	    noWallAhead = true; //rename
 	}
 
 	if(leftSensor>THRESHOLD){
-	     left = true;
+	     noLeftWall = true;
 	}
 	if(rightSensor>THRESHOLD){
-	     right = true;
+	     noRightWall = true;
 	}
 
-	if(right){
+	if(noRightWall){
 
 	    set_motor(1, 10);//right motor
 	    set_motor(2, 100);//left motor               //Change thresholds
@@ -63,7 +65,7 @@ int main(){
 	    set_motor(1,0);
 	    set_motor(2,0);
 	}
-	else if(forwards){//stay in the center of the maze
+	else if(noWallAhead){//stay in the center of the maze
 
 	    totalWidth = leftSensor + rightSensor;
 	    rightMotor = (leftSensor/totalWidth)*50;      //vhange threshold
