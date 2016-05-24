@@ -52,20 +52,20 @@ int main (){
         take_picture();
         //display_picture(2,0); //Display picture for debugging purposes
 
-        for(int i=0; i<320; i++){
+        for(int i=0; i<240; i++){
         	
             //get pixel "whiteness"
             //resolution of image is 320x240
             c = get_pixel(i,200,3);
 
-            if(c<160){ // 320/2 ie. if (c < half)
+            if(c<120){ // 320/2 ie. if (c < half)
                 c = 0;  //Black pixel
             }
             else{
                 c = 1;   //white pixel
                 numberOfWhite++;
             }
-            whiteTotal = whiteTotal + (i-160)*c; //add the position of the white pixels (if its white)
+            whiteTotal = whiteTotal + (i-120)*c; //add the position of the white pixels (if its white)
             
             // the 'check ahead' method
             cFuture = get_pixel(i, 230, 3); // currently close to the initial pixel read – may work better if they’re further apart 
@@ -77,7 +77,7 @@ int main (){
                 cFuture = 1;   //white pixel
                 futureNumberOfWhite++;
             }
-            double whiteFutureTotal= whiteFutureTotal + (i-160)*c; 
+            double whiteFutureTotal= whiteFutureTotal + (i-120)*c; 
         }
 	// intersection navigation methods
         if (numberOfWhite == 0) { // go left for a while
@@ -120,9 +120,9 @@ int main (){
 	
 	inteSignal = (errorTotal/totalCount)*ki; // integral signal; running average
 	
-	finalSignal = (currentError+derivativeSignal+inteSignal); // the cumulative signal result
+	finalSignal = (currentError+derivativeSignal+inteSignal)/3; // the cumulative signal result
         
-        adjustment = (finalSignal*127/160); // the actual value for the motors to use
+        adjustment = (finalSignal*127/120); // the actual value for the motors to use
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
