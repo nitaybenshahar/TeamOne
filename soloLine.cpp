@@ -81,7 +81,7 @@ int main (){
                 futureNumberOfWhite++;
             }
             double whiteFutureTotal= whiteFutureTotal + (i-120)*c; 
-        }
+        
 	// intersection navigation methods
         /*if (numberOfWhite == 0) { // go left for a while
 		set_motor(1, -40); 
@@ -149,7 +149,7 @@ int main (){
         
 	prev_error = currentError;
 	printf("adjustment: %f", adjustment);
-	
+        }	
     } // end of primary loop
     // stop motors
     set_motor(1, 0);
