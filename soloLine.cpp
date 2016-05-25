@@ -23,8 +23,8 @@ int main (){
     double current_error = 0;
     double prev_error = 0;
 
-	double totalCount;
-	double currentError;
+    double totalCount;
+    double currentError;
     
     double propSignal;
     double derivativeSignal;
@@ -81,6 +81,7 @@ int main (){
                 futureNumberOfWhite++;
             }
             double whiteFutureTotal= whiteFutureTotal + (i-120)*c; 
+        }
         
 	// intersection navigation methods
         /*if (numberOfWhite == 0) { // go left for a while
@@ -106,7 +107,7 @@ int main (){
         
         if (numberOfWhite >= 1) { // no dividing by 0
         	currentError = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
-		//printf("%d\n", currentError); //Print error signal for Debugging purposes
+		printf("%f\n", currentError); //Print error signal for Debugging purposes
 		counter++;
 		
 		Sleep(0,100000);
@@ -119,11 +120,11 @@ int main (){
         propSignal = currentError*kp;
         
         derivativeSignal = (currentError-prev_error/0.1)*kd;
-	printf("Derivative signal is: %d", derivativeSignal);
+	printf("Derivative signal is: %f\n", derivativeSignal);
 	
 	//inteSignal = (errorTotal/totalCount)*ki; // integral signal; running average
 	
-	//finalSignal = (currentError+derivativeSignal+inteSignal)/3; // the cumulative signal result
+	//finalSignal = (currentError+derivativeSignal+inteSignal); // the cumulative signal result
 	finalSignal = propSignal+derivativeSignal;        
 
         adjustment = (finalSignal*20/120); // the actual value for the motors to use
@@ -149,7 +150,6 @@ int main (){
         
 	prev_error = currentError;
 	printf("adjustment: %f", adjustment);
-        }	
     } // end of primary loop
     // stop motors
     set_motor(1, 0);
