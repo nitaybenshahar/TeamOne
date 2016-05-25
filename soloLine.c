@@ -30,6 +30,7 @@ int main (){
     double adjustment;
     
     double errorTotal;
+    double totalError;
     
     double rightMotor;
     double leftMotor;
@@ -81,22 +82,22 @@ int main (){
         }
 	// intersection navigation methods
         if (numberOfWhite == 0) { // go left for a while
-		set_motor(1, -127); 
-        	set_motor(2, 127);
+		set_motor(1, -40); 
+        	set_motor(2, 40);
 		Sleep(2,0); // adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
 
 	} else if ((numberOfWhite > 40) && (propSignal <= 0)) { // should go left at any crossroads 
-		set_motor(1, -127); 
-        	set_motor(2, 127);
+		set_motor(1, -40); 
+        	set_motor(2, 40);
 		Sleep(1,0);// hard left for sleep duration
 
 	} else if ((numberOfWhite > 40) && (futureNumberOfWhite > 0)) { // else go straight if line continues
-		set_motor(1, 127); 
-        	set_motor(2, 127);
+		set_motor(1, 40); 
+        	set_motor(2, 40);
 		Sleep(2,0); // may be too long; adjust
 	} else if ((numberOfWhite > 40) && (propSignal > 0)) { // else turn right if line ONLY goes right
-		rightMotor = 127;
-		leftMotor = -127;
+		rightMotor = 40;
+		leftMotor = -40;
 		Sleep(1,0); // hard right for sleep duration
 	}
 	// end of navigation method
@@ -122,23 +123,23 @@ int main (){
 	
 	finalSignal = (currentError+derivativeSignal+inteSignal)/3; // the cumulative signal result
         
-        adjustment = (finalSignal*127/120); // the actual value for the motors to use
+        adjustment = (finalSignal*40/120); // the actual value for the motors to use
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
         if (propSignal>-10 && propSignal < 10) { // adjust as necessary
-        	rightMotor = 127;
-        	leftMotor = 127;
+        	rightMotor = 40;
+        	leftMotor = 40;
         } else {
-        	rightMotor = 127-adjustment;
-        	leftMotor = -(127+adjustment);//negative so motors turn in the same direction
+        	rightMotor = 40-adjustment;
+        	leftMotor = -(40+adjustment);//negative so motors turn in the same direction
         }
 
         set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
         
-	prev_error = current_error;
-
+	prev_error = currentError;
+	printf(setmotor);
     } // end of primary loop
     // stop motors
     set_motor(1, 0);
