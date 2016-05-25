@@ -71,7 +71,7 @@ int main (){
             whiteTotal = whiteTotal + (i-120)*c; //add the position of the white pixels (if its white)
             
             // the 'check ahead' method
-            cFuture = get_pixel(i, 230, 3); // currently close to the initial pixel read – may work better if they’re further apart 
+            cFuture = get_pixel(230, i, 3); // currently close to the initial pixel read – may work better if they’re further apart 
             // – adjust with testing
             if(c<160){
                 cFuture = 0;  //Black pixel
@@ -119,7 +119,7 @@ int main (){
         
         propSignal = currentError*kp;
         
-        derivativeSignal = (currentError-prev_error/0.1)*kd;
+        derivativeSignal = ((currentError-prev_error)/0.1)*kd;
 	printf("Derivative signal is: %f\n", derivativeSignal);
 	
 	//inteSignal = (errorTotal/totalCount)*ki; // integral signal; running average
