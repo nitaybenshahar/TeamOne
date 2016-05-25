@@ -29,9 +29,9 @@ int main(){
     //Line Following
     char c;
     char cFuture;
-    float kp = 0.95;
-    float ki = 0.3;
-    float kd = 0.04;
+    float kp = 0.83;
+    float ki = 0.02;
+    float kd = 0.15;
     int i;
     int totalSide;
     int leftCheck;
@@ -105,7 +105,7 @@ int main(){
         
         //Left intersection
         for(i = 0; i < 100; i++){
-            c = get_pixel(i, 0, 3);
+            c = get_pixel(i, 0, 3); // check this (i moves)
             if(c > 150){
                 leftCheck++;
             }
@@ -121,7 +121,7 @@ int main(){
         
         //Right intersection
         for(i = 0; i < 100; i++){
-            c = get_pixel(i, 239, 3);
+            c = get_pixel(i, 239, 3); // check
             if(c > 150){
                 rightCheck++;
             }
@@ -182,7 +182,7 @@ int main(){
             }
             
             whiteRatio = (double)rightWhite / (double)whiteTotal;
-            set_motor(1, ((int)(whiteRatio * 60)+20));
+            set_motor(1, ((int)(whiteRatio * 60)+20)); // +20?
             set_motor(2, ((int)((1-whiteRatio) * 60)+20));
             Sleep(0, 5000);
             
