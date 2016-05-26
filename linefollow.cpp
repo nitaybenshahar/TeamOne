@@ -18,7 +18,6 @@ int main (){
     // keep the 'k' constants summing to 1 when testing - they're there for weighting, let's keep it simple
     float kp = 0.95;
     float kd = 0.04;
-    double current_error = 0;
     double prev_error = 0;
 
     double totalCount;
@@ -37,8 +36,6 @@ int main (){
     
     int whiteTotal;
     int numberOfWhite;
-    int futureNumberOfWhite;
-    int futureWhiteTotal;
     int counter = 0;
     
     while(true){
