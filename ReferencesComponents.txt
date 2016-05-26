@@ -1,0 +1,11 @@
+Reference Document
+
+Motors:
+motor 1 = right motor, +ve value = forward movement
+motor 2 = left motor, +ve value = backwards movement
+
+Sensors:
+sensor 0 = left sensor
+sensor 1 = right sensor
+Both: big value = close, small value = far
+
