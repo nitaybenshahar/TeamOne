@@ -90,15 +90,8 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
-        if(-10 < adjustment < 10){
-        	rightMotor = 70.0;
-        	leftMotor = 70.0;
-        	
-        }else{
-        	rightMotor = 70.0+adjustment;
-      		leftMotor = -70.0-adjustment;//negative so motors turn in the same direction
-        
-        }
+       	rightMotor = 70.0+adjustment;
+      	leftMotor = -70.0-adjustment;//negative so motors turn in the same direction
         
       	printf("adjustment in else %f \n", adjustment);
       	printf("left motor else %f \n", leftMotor);
