@@ -60,7 +60,37 @@ int main(){
     //Primary Initialization
     init(1);
     
-    set_motor(1, 100);
+    
+    
+            for(i = 0; i < 240; i++){
+                c = get_pixel(0, i, 3);
+                if(c > 80){
+                
+                    whiteTotal++;
+                
+                    if(i < 120){
+                        rightWhite++;
+                    }
+                }
+            }
+            
+            if(whiteTotal < 1){
+                set_motor(1, -60);
+                set_motor(2, 60);
+            }
+            else{
+                whiteRatio = (double)rightWhite / (double)whiteTotal;
+            
+                derivRatio = (((double)whiteRatio - (double)prevRatio)/timeInterval);
+                
+                prevRatio = whiteRatio;
+                
+                finalRatio = (whiteRatio*kp)+(derivRatio*kd); // k values scale - sum to 1
+            
+                set_motor(1, ((int)(whiteRatio * 75)));
+                set_motor(2, -((int)((1-whiteRatio) * 75)));
+            }
+            Sleep(0, 10000);
     
     
   }
