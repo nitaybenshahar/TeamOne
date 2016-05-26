@@ -56,7 +56,7 @@ int main (){
           
           //get pixel "whiteness"
           //resolution of image is 240x360
-          c = get_pixel(i,320,3);
+          c = get_pixel(i,20,3);
           
           if(c<200){ // 320/2 ie. if (c < half)
                 c = 0;  //Black pixel
