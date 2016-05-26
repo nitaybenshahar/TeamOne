@@ -87,6 +87,8 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
+        //currently bambi turns left but not right?!?!?! Nitay or Matt, any ideas?
+        
        	rightMotor = 70.0+adjustment;
       	leftMotor = -(70.0-adjustment);//I ran through the equations step by step and inside the brackets SHOULD be + yet when set like that it makes the motors equal???
         
