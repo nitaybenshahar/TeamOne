@@ -138,7 +138,7 @@ int main (){
 //	printf("right motor if %f \n", rightMotor);
 //        } else {
         	rightMotor = 70.0+adjustment;
-        	leftMotor = -(70.0-adjustment);//negative so motors turn in the same direction
+        	leftMotor = -(70.0+adjustment);//negative so motors turn in the same direction
 
 	printf("adjustment in else %f \n", adjustment);
 	printf("left motor else %f \n", leftMotor);
