@@ -71,7 +71,7 @@ int main(){
     //Line Following Section
     
     //Loop runs until both sensors sense walls (start of maze)
-    while((read_analog(0) < THRESHOLD) && (read_analog(1) < THRESHOLD)){
+    while((read_analog(0) < THRESHOLD) || (read_analog(1) < THRESHOLD)){
         
         //Set variables
         whiteTotal = 0;
@@ -90,7 +90,7 @@ int main(){
         //Has a line Check
         for(i = 0; i < 240; i++){
             c = get_pixel(0, i, 3);
-            if(c > 150){
+            if(c > 80){
                 lineCheck++;
             }
         }
@@ -98,7 +98,7 @@ int main(){
         //Left intersection
         for(i = 0; i < 100; i++){
             c = get_pixel(i, 0, 3); // check this (i moves)
-            if(c > 150){
+            if(c > 80){
                 leftCheck++;
             }
         }
@@ -106,7 +106,7 @@ int main(){
         //Ahead intersection
         for(i = 0; i < 140; i++){
             c = get_pixel(150, i + 50, 3);
-            if(c > 150){
+            if(c > 80){
                 frontCheck++;
             }
         }
@@ -114,7 +114,7 @@ int main(){
         //Right intersection
         for(i = 0; i < 100; i++){
             c = get_pixel(i, 239, 3); // check
-            if(c > 150){
+            if(c > 80){
                 rightCheck++;
             }
         }
@@ -159,7 +159,7 @@ int main(){
         else{
             for(i = 0; i < 240; i++){
                 c = get_pixel(0, i, 3);
-                if(c > 150){
+                if(c > 80){
                 
                     whiteTotal++;
                 
