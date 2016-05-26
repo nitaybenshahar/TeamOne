@@ -28,51 +28,53 @@ int main (){
     int numberOfWhite;
     int counter = 0;
     
-   while(true){
+    while(true){
       if (counter >= 50) { // main exit loop command
-	    	counter ++;
-  	   	printf("%s\n", "50 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
-    		break;
-      	}
-        whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
-        numberOfWhite = 0;//running total of the number of white pixels
+  	counter ++;
+  	printf("%s\n", "50 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
+	break;
+    }
+      
+    whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
+    numberOfWhite = 0;//running total of the number of white pixels
         
-        take_picture();
+    take_picture();
         
-        for(int i=0; i<=240; i++){
+    	for(int i=0; i<=240; i++){
           
-          while(numberOfWhite < 1){
-          
-            //get pixel "whiteness"
-            //resolution of image is 240x360
-            c = get_pixel(320,i,3); //it's turning earlier than it should, indicating that it is seeing the turns earlier 
-            
-            if(c<200){ // 320/2 ie. if (c < half)
-                  c = 0;  //Black pixel
-                  whiteTotal = 0;
-            }else{
-                c = 1;   //white pixel
-               whiteTotal = i;
-            }
-          }
-        }
-       if (numberOfWhite >= 1) { // no dividing by 0
-	      	printf("%f\n", whiteTotal); //Print error signal for Debugging purposes
+	   while(numberOfWhite < 1){
+	          
+		//get pixel "whiteness"
+	        //resolution of image is 240x360
+	        c = get_pixel(320,i,3); //it's turning earlier than it should, indicating that it is seeing the turns earlier 
+	            
+	        if(c<200){ // 320/2 ie. if (c < half)
+	               	c = 0;  //Black pixel
+	               	whiteTotal = 0;
+	        }else{
+	               	c = 1;   //white pixel
+	              		whiteTotal = i;
+	        }
+	    }
+    	}
+       	if (numberOfWhite >= 1) { // no dividing by 0
+		printf("%f\n", whiteTotal); //Print error signal for Debugging purposes
 		      
-		      if(whiteTotal > 240){
-		        printf("The image is portrait.");
-		      }
+		if(whiteTotal > 240){
+			printf("The image is portrait.");//this is here in case my logic regarding the reading of the camera is wrong.
+		}
 		      
       		Sleep(0,500000);
         }
         
-        adjustment = 120 - whiteTotal;
+        adjustment = 120 - whiteTotal;//middle of the picture (i.e current location) minus the location of the line and therefor the change that needs to happen
+        //if adjustment is negative then the line is to the right and if it is positive then the line is to the left. 
          
         if(whiteTotal>0){
-          rightMotor = 70.0+adjustment;
+        	rightMotor = 70.0+adjustment;
         	leftMotor = -70.0+adjustment;
         }else{ //if there's no white it will turn right
-          rightMotor = 70.0;
+        	rightMotor = 70.0;
         	leftMotor = -90.0;
         }
       	
@@ -83,8 +85,8 @@ int main (){
       	set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
      }
-  set_motor(1, 0);
-  set_motor(2, 0);
-  //printf("%s", "\nProgram fin"); // debugging - program complete msg
-  return 0;
+     set_motor(1, 0);
+     set_motor(2, 0);
+     //printf("%s", "\nProgram fin"); // debugging - program complete msg
+     return 0;
 }
