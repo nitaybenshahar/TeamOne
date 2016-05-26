@@ -181,9 +181,9 @@ int main(){
             
             finalRatio = (whiteRatio*kp)+(derivRatio*kd); // k values scale - sum to 1
             
-            set_motor(1, ((int)(whiteRatio * 100)));
-            set_motor(2, -((int)((1-whiteRatio) * 100)));
-            Sleep(0, 5000);
+            set_motor(1, ((int)(whiteRatio * 50)));
+            set_motor(2, -((int)((1-whiteRatio) * 50)));
+            Sleep(0, 10000);
             
         }
     }
