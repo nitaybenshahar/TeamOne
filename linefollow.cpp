@@ -96,7 +96,7 @@ int main (){
         	
         }else{
         	rightMotor = 70.0+adjustment;
-      		leftMotor = -70.0-adjustment);//negative so motors turn in the same direction
+      		leftMotor = -70.0-adjustment;//negative so motors turn in the same direction
         
         }
         
