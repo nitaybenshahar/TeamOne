@@ -3,6 +3,10 @@
 //I'm doing this as we aren't sure why Bambi isn't working and are wondering if the negative might have a part in that
 //There is no kp or kd to keep it simple
 
+//also a thought for the maze, if we completely run out of time and we dont have anything for the maze written out...
+//could we make it just the inverse of this method? i.e. it chaecks if it is black in front of it and follow the black...
+//as the maze floor is black and the walls white.
+
 # include <stdio.h>
 # include <time.h>
 
