@@ -66,7 +66,7 @@ int main (){
               numberOfWhite++;
           }
             
-           whiteTotal = whiteTotal + (i-120)*c; //add the position of the white pixels (if its white)
+           whiteTotal = whiteTotal + (i-180)*c; //add the position of the white pixels (if its white)
        }
        
        if (numberOfWhite >= 1) { // no dividing by 0
@@ -76,14 +76,14 @@ int main (){
       		Sleep(0,500000);
         } 
        
-       propSignal = currentError*kp;
+        propSignal = currentError*kp;
         
         derivativeSignal = ((currentError-prev_error)/0.1)*kd;
       	printf("Derivative signal is: %f\n", derivativeSignal);
       	
       	finalSignal = propSignal+derivativeSignal;
       	
-      	adjustment = (finalSignal*20/120); // the actual value for the motors to use
+      	adjustment = (finalSignal*20/180); // the actual value for the motors to use
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
