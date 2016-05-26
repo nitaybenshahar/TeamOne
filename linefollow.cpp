@@ -73,7 +73,7 @@ int main (){
         	currentError = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
 	      	printf("%f\n", currentError); //Print error signal for Debugging purposes
 		
-      		Sleep(0,100000);
+      		Sleep(0,500000);
       	
       		errorTotal = errorTotal + currentError;
 
