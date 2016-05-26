@@ -52,7 +52,6 @@ int main(){
     
     //Maze
     int leftSensor, rightSensor;
-    char c;
     int whiteWall;
     bool noLeftWall, noRightWall, noWallAhead;
     int THRESHOLD = 200;                                                               //Sensor Threshold
@@ -72,7 +71,7 @@ int main(){
     //Line Following Section
     
     //Loop runs until both sensors sense walls (start of maze)
-    while((readAnalog(0) > THRESHOLD) && (readAnalog(1) > THRESHOLD)){
+    while((read_analog(0) > THRESHOLD) && (read_analog(1) > THRESHOLD)){
         
         //Set variables
         whiteTotal = 0;
