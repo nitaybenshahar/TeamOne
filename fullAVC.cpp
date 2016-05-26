@@ -54,7 +54,7 @@ int main(){
     int leftSensor, rightSensor;
     int whiteWall;
     bool noLeftWall, noRightWall, noWallAhead;
-    int THRESHOLD = 200;                                                               //Sensor Threshold
+    int THRESHOLD = 250;                                                               //Sensor Threshold
     int totalWidth;
     
     //Primary Initialization
@@ -71,7 +71,7 @@ int main(){
     //Line Following Section
     
     //Loop runs until both sensors sense walls (start of maze)
-    while((read_analog(0) > THRESHOLD) && (read_analog(1) > THRESHOLD)){
+    while((read_analog(0) < THRESHOLD) && (read_analog(1) < THRESHOLD)){
         
         //Set variables
         whiteTotal = 0;
@@ -123,35 +123,35 @@ int main(){
         
         if(lineCheck < 6){
             set_motor(1, -50);
-            set_motor(2, -50);
+            set_motor(2, 50);
             Sleep(1,0);                                                   //Reverse Sleep
         }
         
         //Left Path Statement
         else if((leftCheck > 5) && (lineCheck > 5)){
-            set_motor(1, 0);
-            set_motor(2, 100);
+            set_motor(1, 100);
+            set_motor(2, 0);
             Sleep(1, 0);                                                             //Turn Left Sleep
         }
         
         //Forward Path Statement
         else if((frontCheck > 5) && (rightCheck > 5) && (lineCheck > 5)){
             set_motor(1, 100);
-            set_motor(2, 100);
+            set_motor(2, -100);
             Sleep(1, 0);                                                            //Forward Step Sleep
         }
         
         //Right Path Statement
         else if((rightCheck > 5) && (lineCheck > 5)){
-            set_motor(1, 100);
-            set_motor(2, 0);
+            set_motor(1, 0);
+            set_motor(2, 100);
             Sleep(1, 0);                                                             //Turn Right Sleep
         }
         
         //Path Ends Statement 
         else if((leftCheck < 6) && (frontCheck < 6) && (rightCheck < 6)){
             set_motor(1, 100);
-            set_motor(2, -100);
+            set_motor(2, 100);
             Sleep(1, 0);                                                             //Turn Around Sleep
         }
         
@@ -182,7 +182,7 @@ int main(){
             finalRatio = (whiteRatio*kp)+(derivRatio*kd); // k values scale - sum to 1
             
             set_motor(1, ((int)(whiteRatio * 100)));
-            set_motor(2, ((int)((1-whiteRatio) * 100)));
+            set_motor(2, -((int)((1-whiteRatio) * 100)));
             Sleep(0, 5000);
             
         }
