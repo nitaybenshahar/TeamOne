@@ -61,10 +61,21 @@ int main(){
     init(1);
     
     
-    
+        while(true){
+            
+        whiteTotal = 0;
+        rightWhite = 0;
+        whiteRatio = 0.0;
+        leftCheck = 0;
+        frontCheck = 0;
+        rightCheck = 0;
+        lineCheck = 0;
+        
+        take_picture();
+            
             for(i = 0; i < 240; i++){
                 c = get_pixel(40, i, 3);
-                if(c > 80){
+                if(c > 100){
                 
                     whiteTotal++;
                 
@@ -91,6 +102,7 @@ int main(){
                 set_motor(2, -((int)((1-whiteRatio) * 75)));
             }
             Sleep(0, 10000);
+        }
     
     
   }
