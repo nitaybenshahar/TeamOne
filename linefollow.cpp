@@ -91,12 +91,12 @@ int main (){
         //equilibrium position: both motors are set to 127
         
         if(-10 < adjustment < 10){
-        	rightMotor = 70;
-        	leftMotor = 70;
+        	rightMotor = -70.0;
+        	leftMotor = 70.0;
         	
         }else{
         	rightMotor = 70.0+adjustment;
-      		leftMotor = (70.0-adjustment);//negative so motors turn in the same direction
+      		leftMotor = -(70.0-adjustment);//negative so motors turn in the same direction
         
         }
         
