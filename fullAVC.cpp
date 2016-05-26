@@ -63,10 +63,10 @@ int main(){
     //Networking Section
     
     //Send Signal to open gate
-    connect_to_server("130.195.6.196", 1024);
-    send_to_server("please");
-    receive_from_server(message);
-    send_to_server(message);
+//    connect_to_server("130.195.6.196", 1024);
+//    send_to_server("please");
+//    receive_from_server(message);
+//    send_to_server(message);
     
     //Line Following Section
     
