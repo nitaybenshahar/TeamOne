@@ -57,7 +57,7 @@ int main (){
           
           //get pixel "whiteness"
           //resolution of image is 240x360
-          c = get_pixel(i,180,3);
+          c = get_pixel(i,280,3); //it's turning earlier than it should, indicating that it is seeing the turns earlier 
           
           if(c<200){ // 320/2 ie. if (c < half)
                 c = 0;  //Black pixel
@@ -88,7 +88,7 @@ int main (){
         //equilibrium position: both motors are set to 127
         
        	rightMotor = 70.0+adjustment;
-      	leftMotor = -(70.0+adjustment);//I ran through the equations step by step and inside the brackets SHOULD be + yet it doesn't seem to like it
+      	leftMotor = -(70.0-adjustment);//I ran through the equations step by step and inside the brackets SHOULD be + yet when set like that it makes the motors equal???
         
       	printf("adjustment in else %f \n", adjustment);
       	printf("left motor else %f \n", leftMotor);
