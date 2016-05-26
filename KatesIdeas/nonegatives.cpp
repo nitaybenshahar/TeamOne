@@ -30,10 +30,12 @@ int main (){
     
    while(true){
       if (counter >= 50) { // main exit loop command
-	    	counter ++;
   	   	printf("%s\n", "50 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
     		break;
       	}
+      	
+      	counter ++;
+      	
         whiteTotal = 0;//sum of the position of the white pixels, measured from center = 0
         numberOfWhite = 0;//running total of the number of white pixels
         
