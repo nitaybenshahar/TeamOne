@@ -79,7 +79,7 @@ int main(){
     //Line Following Section
     
     //Loop runs until both sensors sense walls (start of maze)
-    while((readAnalog(0) < THRESHOLD) && (readAnalog(1) < THRESHOLD)){
+    while((readAnalog(0) > THRESHOLD) && (readAnalog(1) > THRESHOLD)){
         
         //Set variables
         whiteTotal = 0;
@@ -182,8 +182,8 @@ int main(){
             }
             
             whiteRatio = (double)rightWhite / (double)whiteTotal;
-            set_motor(1, ((int)(whiteRatio * 60)+20)); // +20?
-            set_motor(2, ((int)((1-whiteRatio) * 60)+20));
+            set_motor(1, ((int)(whiteRatio * 100)));
+            set_motor(2, ((int)((1-whiteRatio) * 100)));
             Sleep(0, 5000);
             
         }
