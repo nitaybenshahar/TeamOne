@@ -60,3 +60,28 @@ Thursday meeting - we wrote out bullet points for each heading for the progress 
 Printing of the chassis will be done by the end of today, leaving only the camera and sensor mounts to be printed.
 Meetings will be on Wednesday AND Thursday this week to ensure everyone can make one.
 Code for opening the gate was completed but not tested.
+
+Patrick was sick and didnt make the meetings on wednesday or thursday.
+
+Code for the gate was trialled and corrected by Kate and Chintan and now works.
+
+Thursday
+
+
+//please add more, I updatewd this last week but obviously didn't commit properly as the update didn't go through.
+
+25/05/16 - 26/05/16
+Wednesday
+Hardware was finished (a back wheel holder printed and marbles got)
+Kate,Chintan and Dash worked on the code and had lots of issues with only turning left.
+
+In the afternoon Chin and Dash worked continued to work on it to no avail.
+
+Thursday
+Kate and Chintan both rewrote code for th line follower to try different logic. Kate's linefollower.cpp was the closest, however, even with trial and error Bambi swtill didnt follow the line properly. Three possible causes were decided upon, camera logic, hardware issue with wheels or other logic. 
+
+Matt was sick and Nitay cant make thursdays.
+
+Patrick drew designs of the robot for reports.
+
+In the evening Kate created another possible set of code excluding the ngative logic which will be tested by those meeting on Friday.
