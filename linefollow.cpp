@@ -43,6 +43,7 @@ int main (){
     
     while(true){
       if (counter >= 50) { // main exit loop command
+		counter ++;
   		printf("%s\n", "50 loops completed"); // adjust to counter+" loops completed" when you can check C syntax
   		break;
     	}
@@ -89,9 +90,16 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
-        rightMotor = 70.0+adjustment;
-      	leftMotor = -(70.0-adjustment);//negative so motors turn in the same direction
-
+        if(-10 < adjustment < 10){
+        	rightMotor = 70;
+        	leftMotor = 70;
+        	
+        }else{
+        	rightMotor = 70.0+adjustment;
+      		leftMotor = (70.0-adjustment);//negative so motors turn in the same direction
+        
+        }
+        
       	printf("adjustment in else %f \n", adjustment);
       	printf("left motor else %f \n", leftMotor);
       	printf("right motor else %f \n", rightMotor); 
