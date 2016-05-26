@@ -57,7 +57,7 @@ int main (){
           
           //get pixel "whiteness"
           //resolution of image is 240x360
-          c = get_pixel(i,280,3); //it's turning earlier than it should, indicating that it is seeing the turns earlier 
+          c = get_pixel(280,i,3); //it's turning earlier than it should, indicating that it is seeing the turns earlier 
           
           if(c<200){ // 320/2 ie. if (c < half)
                 c = 0;  //Black pixel
