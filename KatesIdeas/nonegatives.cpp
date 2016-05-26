@@ -55,17 +55,18 @@ int main (){
            whiteTotal = whiteTotal + i*c; //add the position of the white pixels (if its white)
         }
        if (numberOfWhite >= 1) { // no dividing by 0
-        	currentError = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
+        	currentError = whiteTotal/numberOfWhite; //center of the white line, running from 0 through to 240
 	      	printf("%f\n", currentError); //Print error signal for Debugging purposes
 		      
 		      if(currentError > 240){
-		        printf("The image is portrait.");
+		        printf("The image is portrait.");//this is here in case my logic regarding the reading of the camera is wrong.
 		      }
 		      
       		Sleep(0,500000);
         }
         
-        adjustment = 120 - currentError;
+        adjustment = 120 - currentError; //middle of the picture (i.e current location) minus the location of the line and therefor the change that needs to happen
+        //if adjustment is negative then the line is to the right and if it is positive then the line is to the left. 
          
         rightMotor = 70.0+adjustment;
       	leftMotor = -70.0+adjustment;
