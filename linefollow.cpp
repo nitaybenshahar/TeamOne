@@ -65,7 +65,7 @@ int main (){
               numberOfWhite++;
           }
             
-           whiteTotal = whiteTotal + (i-120)*c; //add the position of the white pixels (if its white)
+           whiteTotal = whiteTotal + i*c; //add the position of the white pixels (if its white)
        }
        
        if (numberOfWhite >= 1) { // no dividing by 0
