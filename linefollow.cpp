@@ -74,9 +74,6 @@ int main (){
 	      	printf("%f\n", currentError); //Print error signal for Debugging purposes
 		
       		Sleep(0,500000);
-      	
-      		errorTotal = currentError;
-
         } 
        
        propSignal = currentError*kp;
@@ -99,6 +96,8 @@ int main (){
       	
       	set_motor(1, rightMotor); //set motor speeds
         set_motor(2, leftMotor);
+        
+        prev_error = currentError;
       
     } // end of primary loop
     // stop motors
