@@ -52,7 +52,7 @@ int main (){
               numberOfWhite++;
           }
             
-           whiteTotal = whiteTotal + (i-180)*c; //add the position of the white pixels (if its white)
+           whiteTotal = whiteTotal + i*c; //add the position of the white pixels (if its white)
         }
        if (numberOfWhite >= 1) { // no dividing by 0
         	currentError = whiteTotal/numberOfWhite; //center of the white line, running from -160 through 0 to 160
