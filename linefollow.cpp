@@ -18,7 +18,7 @@ int main (){
     // keep the 'k' constants summing to 1 when testing - they're there for weighting, let's keep it simple
     float kp = 0.95;
     float kd = 0.04;
-   double current_error = 0;
+    double current_error = 0;
     double prev_error = 0;
 
     double totalCount;
@@ -56,7 +56,7 @@ int main (){
           
           //get pixel "whiteness"
           //resolution of image is 240x360
-          c = get_pixel(i,130,3);
+          c = get_pixel(i,320,3);
           
           if(c<200){ // 320/2 ie. if (c < half)
                 c = 0;  //Black pixel
