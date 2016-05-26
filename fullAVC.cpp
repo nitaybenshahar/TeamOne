@@ -31,7 +31,7 @@ int main(){
     char cFuture;
     float kp = 0.83;
     float ki = 0.02;
-    float kd = 0.15;
+    float kd = 0.17;
     int i;
     int totalSide;
     int leftCheck;
@@ -39,23 +39,16 @@ int main(){
     int rightCheck;
     int lineCheck;
     
-    double current_error = 0;
-    double prev_error = 0;
-
-    double totalCount, currentError;
-    
-    double propSignal, derivativeSignal, inteSignal, finalSignal;
-    double adjustment = 0;
-    
-    double errorTotal;
-    
-    double rightMotor = 0;
-    double leftMotor = 0;
-    
     int whiteTotal, numberOfWhite, futureNumberOfWhite, futureWhiteTotal;
     int rightWhite;
     int counter = 0;
+    
     double whiteRatio;
+    double prevRatio;
+    double derivRatio;
+    double finalRatio;
+    
+    float timeInterval = 0.0005; // update when changing primary sleep duration
     
     //Maze
     int leftSensor, rightSensor;
@@ -182,6 +175,13 @@ int main(){
             }
             
             whiteRatio = (double)rightWhite / (double)whiteTotal;
+            
+            derivRatio = (((double)whiteRatio - (double)prevRatio)/timeInterval);
+            
+            prevRatio = whiteRatio;
+            
+            finalRatio = (whiteRatio*kp)+(derivRatio*kd); // k values scale - sum to 1
+            
             set_motor(1, ((int)(whiteRatio * 100)));
             set_motor(2, ((int)((1-whiteRatio) * 100)));
             Sleep(0, 5000);
@@ -189,11 +189,12 @@ int main(){
         }
     }
     
-    while(true){
+    //presumably for maze - commented out for now
+    //while(true){
         
         
         
-    }
+    //}
     return 0;
 }
 
