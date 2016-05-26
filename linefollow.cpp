@@ -88,7 +88,7 @@ int main (){
         //equilibrium position: both motors are set to 127
         
        	rightMotor = 70.0+adjustment;
-      	leftMotor = -(70.0-adjustment);//negative so motors turn in the same direction
+      	leftMotor = -(70.0+adjustment);//I ran through the equations step by step and inside the brackets SHOULD be + yet it doesn't seem to like it
         
       	printf("adjustment in else %f \n", adjustment);
       	printf("left motor else %f \n", leftMotor);
