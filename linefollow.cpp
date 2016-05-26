@@ -75,7 +75,7 @@ int main (){
 		
       		Sleep(0,500000);
       	
-      		errorTotal = errorTotal + currentError;
+      		errorTotal = currentError;
 
         } 
        
@@ -90,8 +90,8 @@ int main (){
         //the *127/160 scales the value so the motor can handle it
         //equilibrium position: both motors are set to 127
         
-       	rightMotor = -(70.0-adjustment);
-      	leftMotor = 70.0+adjustment;//negative so motors turn in the same direction
+       	rightMotor = 70.0+adjustment);
+      	leftMotor = -(70.0-adjustment);//negative so motors turn in the same direction
         
       	printf("adjustment in else %f \n", adjustment);
       	printf("left motor else %f \n", leftMotor);
