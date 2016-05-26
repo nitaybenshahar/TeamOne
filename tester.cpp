@@ -63,7 +63,7 @@ int main(){
     
     
             for(i = 0; i < 240; i++){
-                c = get_pixel(0, i, 3);
+                c = get_pixel(40, i, 3);
                 if(c > 80){
                 
                     whiteTotal++;
