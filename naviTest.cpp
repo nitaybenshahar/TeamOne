@@ -94,7 +94,7 @@ int main(){
                 set_motor(1, -60);
                 set_motor(2, 60);
            printf("reverse beep beep!! \n\n\n");
-           Sleep(1,0);
+           Sleep(0,1);
 }
             else{
 		
@@ -113,12 +113,20 @@ int main(){
 		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40);
 		
 
-		// else {
-		 
-		printf("Motor One: %d", motorOne);
-		    set_motor(1, motorOne);
-		    set_motor(2, -motorOne);
-       //}
+		if (numberOfWhite == 0) { // go left for a while
+		motorOne = -40; 
+		// adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
+	} else if ((numberOfWhite > 40) && (propSignal <= 0)) { // should go left at any crossroads 
+		motorOne = -40; // hard left for sleep duration
+	} else if ((numberOfWhite > 40) && (futureNumberOfWhite > 0)) { // else go straight if line continues
+		motorOne = motorOne;
+	} else if ((numberOfWhite > 40) && (propSignal > 0)) { // else turn right if line ONLY goes right
+		motorOne = 40;
+	}
+	printf("Motor One: %d", motorOne);
+	set_motor(1, motorOne);
+	set_motor(2, -motorOne);
+       }
    
          }
             Sleep(0, 1000);
