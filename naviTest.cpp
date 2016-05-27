@@ -23,8 +23,6 @@ int main(){
 
     //VARIABLE INITIALIZATION
     
-    //Networking
-    char message[24];
     
     //Line Following
     char c;
