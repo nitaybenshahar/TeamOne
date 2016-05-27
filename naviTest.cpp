@@ -118,7 +118,7 @@ int main(){
 		// adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
 	} else if ((whiteTotal > 40) && (motorOne <= 0)) { // should go left at any crossroads 
 		motorOne = -40; // hard left for sleep duration
-	} else if ((whiteTotal > 40) { // else go straight if line continues
+	} else if (whiteTotal > 40) { // else go straight if line continues
 		motorOne = motorOne;
 	} else if ((whiteTotal > 40) && (motorOne > 0)) { // else turn right if line ONLY goes right
 		motorOne = 40;
@@ -132,6 +132,3 @@ int main(){
             Sleep(0, 1000);
                     prevWhiteLocation = whiteLocation;
         }
-    
-    
-  }
