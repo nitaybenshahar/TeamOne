@@ -115,7 +115,7 @@ int main(){
 
 		// else {
 		 
-		printf("Motor One: %f", motorOne);
+		printf("Motor One: %d", motorOne);
 		    set_motor(1, motorOne);
 		    set_motor(2, -motorOne);
        //}
