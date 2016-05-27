@@ -62,6 +62,15 @@ int main(){
     //Primary Initialization
     init(1);
     
+    connect_to_server("130.195.6.196", 1024);
+    
+    send_to_server("please");
+    
+    char message[24];
+    
+    receive_from_server(message);
+    
+    send_to_server(message);
     
         while(true){
         
