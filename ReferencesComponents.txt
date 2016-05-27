@@ -10,4 +10,13 @@ sensor 1 = right sensor
 Both: big value = close, small value = far
 
 SSHing:
-Typr in the command line from the computer
+Type in the command line from the computer:
+    ssh pi@10.140.133.86
+Password is 'pi'
+
+Compiling and Running:
+To change folder use the command 'cd <folder name>' or 'cd ..' to go back one folder.
+Once your in the folder containing the file, compile it by typing:
+    sudo gcc -L/usr/lib/ -o <filename> <filename>.cpp -lE101
+To run the program type:
+    sudo ./<filename>
