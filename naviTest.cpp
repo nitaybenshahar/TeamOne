@@ -39,7 +39,7 @@ int main(){
     int rightCheck;
     int lineCheck;
     
-    int whiteTotal, numberOfWhite, futureNumberOfWhite, futureWhiteTotal;
+    int whiteTotal, futureWhiteTotal;
     int rightWhite;
     int counter = 0;
     double prevWhiteLocation;
@@ -113,14 +113,14 @@ int main(){
 		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40);
 		
 
-		if (numberOfWhite == 0) { // go left for a while
+		if (whiteTotal == 0) { // go left for a while
 		motorOne = -40; 
 		// adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
-	} else if ((numberOfWhite > 40) && (propSignal <= 0)) { // should go left at any crossroads 
+	} else if ((whiteTotal > 40) && (motorOne <= 0)) { // should go left at any crossroads 
 		motorOne = -40; // hard left for sleep duration
-	} else if ((numberOfWhite > 40) && (futureNumberOfWhite > 0)) { // else go straight if line continues
+	} else if ((whiteTotal > 40) { // else go straight if line continues
 		motorOne = motorOne;
-	} else if ((numberOfWhite > 40) && (propSignal > 0)) { // else turn right if line ONLY goes right
+	} else if ((whiteTotal > 40) && (motorOne > 0)) { // else turn right if line ONLY goes right
 		motorOne = 40;
 	}
 	printf("Motor One: %d", motorOne);
