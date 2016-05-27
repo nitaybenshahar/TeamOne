@@ -111,10 +111,11 @@ int main(){
 		whiteLocation = whiteLocation/whiteTotal;
 		
 		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40);
+		int motorTwo = -(((whiteLocation*40/120)*kp+kd*derivWhite)+40));
 		
 
 	//	if (whiteTotal == 0) { // go left for a while
-		motorOne = -40; 
+		//motorOne = -40; 
 		// adjust to go ~180 degrees; maze variant will be more complex (& likely the biggest hurdle)
 	//} else if ((whiteTotal > 40) && (motorOne <= 0)) { // should go left at any crossroads 
 	//	motorOne = -40; // hard left for sleep duration
@@ -125,7 +126,7 @@ int main(){
 	//}
 	printf("Motor One: %d", motorOne);
 	set_motor(1, motorOne);
-	set_motor(2, -motorOne);
+	set_motor(2, motorTwo);
        }
    
          }
