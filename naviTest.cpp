@@ -110,7 +110,7 @@ int main(){
 		derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
 		whiteLocation = whiteLocation/whiteTotal;
 		
-		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40);
 		
 
 		 else {
