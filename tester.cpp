@@ -85,6 +85,9 @@ int main(){
                 }
             }
             
+            printf("whiteTotal: %d \n rightWhite: %d\n\n", whiteTotal, rightWhite)
+            
+            /**
             if(whiteTotal < 1){
                 set_motor(1, -60);
                 set_motor(2, 60);
@@ -98,10 +101,11 @@ int main(){
                 
                 finalRatio = (whiteRatio*kp)+(derivRatio*kd); // k values scale - sum to 1
             
-                set_motor(1, ((int)(whiteRatio * 75)));
-                set_motor(2, -((int)((1-whiteRatio) * 75)));
+                set_motor(1, ((int)(whiteRatio * 60)+30));
+                set_motor(2, -((int)((1-whiteRatio) * 60)+30));
             }
             Sleep(0, 10000);
+            */        
         }
     
     
