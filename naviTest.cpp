@@ -111,7 +111,7 @@ int main(){
 		whiteLocation = whiteLocation/whiteTotal;
 		
 		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40);
-		int motorTwo = -(((whiteLocation*40/120)*kp+kd*derivWhite)+40));
+		int motorTwo = -(((whiteLocation*40/120)*kp+kd*derivWhite)+40);
 		
 
 	//	if (whiteTotal == 0) { // go left for a while
