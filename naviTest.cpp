@@ -91,10 +91,10 @@ int main(){
 	printf("White Total: %d\n\n",whiteTotal);
            
  if(whiteTotal < 1){
-                set_motor(1, -60);
-                set_motor(2, 60);
+                //set_motor(1, -60);
+                //set_motor(2, 60);
            printf("reverse beep beep!! \n\n\n");
-           Sleep(0,1);
+           //Sleep(0,1);
 }
             else{
 		
