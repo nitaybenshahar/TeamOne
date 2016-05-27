@@ -113,12 +113,12 @@ int main(){
 		int motorOne =  ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40);
 		
 
-		 else {
+		// else {
 		 
 		printf("Motor One: %f", motorOne);
 		    set_motor(1, motorOne);
 		    set_motor(2, -motorOne);
-       }
+       //}
    
          }
             Sleep(0, 1000);
