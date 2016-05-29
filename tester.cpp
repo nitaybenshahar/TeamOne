@@ -31,7 +31,7 @@ int main(){
     char cFuture;
     float kp = 0.8;
     float ki = 0.02;
-    float kd = 0;
+    float kd = 0.02;
     int i;
     int totalSide;
     int leftCheck;
@@ -49,6 +49,7 @@ int main(){
     double derivRatio;
     double finalRatio;
     double derivWhite = 0;
+    double integWhite = 0;
 
     float timeInterval = 0.0005; // update when changing primary sleep duration
     
@@ -63,66 +64,42 @@ int main(){
     init(1);
     
     
-        while(true){
+	while(true){
         
-	whiteLocation = 0;
-        whiteTotal = 0;
-        rightWhite = 0;
-        whiteRatio = 0.0;
-        leftCheck = 0;
-        frontCheck = 0;
-        rightCheck = 0;
-        lineCheck = 0;
+		whiteLocation = 0;
+        	whiteTotal = 0;
+        	rightWhite = 0;
+		whiteRatio = 0.0;
+        	leftCheck = 0;
+        	frontCheck = 0;
+        	rightCheck = 0;
+        	lineCheck = 0;
         
-        take_picture();
+        	take_picture();
             
-            for(i = 0; i < 240; i++){
-                c = get_pixel(40, i, 3);
-                if(c > 120){
-                
-                    whiteTotal++;
-		    whiteLocation = whiteLocation + (i-120);
-                
-                    if(i < 120){
-                        rightWhite++;
-                    }
-                }
-            }
-	printf("White Total: %d\n\n",whiteTotal);
-           
- if(whiteTotal < 1){
-                set_motor(1, -60);
-                set_motor(2, 60);
-           printf("reverse beep beep!! \n\n\n"); 
-}
-            else{
+    		for(i = 0; i < 240; i++){
+			c = get_pixel(40, i, 3);
+			if(c > 120){
+                    		whiteTotal++;
+				whiteLocation = whiteLocation + (i-120);
+                	}
+    		}
+ 		if(whiteTotal < 1){
+                	set_motor(1, -60);
+                	set_motor(2, 60);
+		}
+    		else{
+ 			derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
+			integWhite = integWhite + ((double)whiteLocation * 0.01);
+			whiteLocation = whiteLocation/whiteTotal;
 		
-                whiteRatio = (double)rightWhite / (double)whiteTotal;
-             
-                derivRatio = (((double)whiteRatio - (double)prevRatio)/timeInterval);
-                
-                prevRatio = whiteRatio;
-                
-                finalRatio = (whiteRatio*kp)+(derivRatio*kd); // k values scale - sum to 1
-	       
-
-		derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
-		whiteLocation = whiteLocation/whiteTotal;
-		//if(whiteLocation<30 &&whiteLocation>-30){
-                  //  set_motor(1, ((int)(whiteRatio * 60)+30));
-                    //set_motor(2, -((int)((1-whiteRatio) * 60)+30));
-		//}
-		//else
-		//{
-		    set_motor(1, ((int) ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
-		    set_motor(2, -((int) (((whiteLocation*40/120)*kp+kd*derivWhite)+40)));
-
-		//}
-   
-         }
-            Sleep(0, 1000);
-                    prevWhiteLocation = whiteLocation;
-        }
-    
-    
-  }
+			// set_motor(1, ((int) ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+			// set_motor(2, -((int) (((whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+		
+			set_motor(1, ((int)(-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))));
+			set_motor(2, -((int) (((whiteLocation*40/120)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)));
+        	}
+    		Sleep(0, 1000);
+    		prevWhiteLocation = whiteLocation;
+	}
+}
