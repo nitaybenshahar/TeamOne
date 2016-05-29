@@ -121,21 +121,29 @@ int main(){
         if(left){
             set_motor(1, 50);
             set_motor(2, 0);
+            derivWhite = 0.0;
+            integWhite = 0.0;
             Sleep(0, 500000);                            //Left Sleep
         }
         else if(front && right){
             set_motor(1, 50);
             set_motor(2, -50);
+            derivWhite = 0.0;
+            integWhite = 0.0;
             Sleep(0, 500000);                           //Front Sleep
         }
         else if(right){
             set_motor(1, 0);
             set_motor(2, -50);
+            derivWhite = 0.0;
+            integWhite = 0.0;
             Sleep(0, 500000);                           //Right Sleep
         }
         else if(whiteTotal < 1){
             set_motor(1, -50);
             set_motor(2, 50);
+            derivWhite = 0.0;
+            integWhite = 0.0;
             Sleep(0, 100000);                           //Turn around Sleep
         }
         else{
