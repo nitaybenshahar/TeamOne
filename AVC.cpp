@@ -38,6 +38,7 @@ int main(){
     bool left, front, right;
     
     int whiteTotal, prevWhiteLocation, whiteLocation;
+    //int motorOne, motorTwo;
     
     double whiteRatio;
     double prevRatio;
@@ -57,7 +58,7 @@ int main(){
     //Networking Section
     
     //Send Signal to open gate
-   connect_to_server("130.195.6.196", 1024);
+    connect_to_server("130.195.6.196", 1024);
     send_to_server("please");
     receive_from_server(message);
     send_to_server(message);
@@ -80,42 +81,42 @@ int main(){
         take_picture();
         
         for(i = 0; i < 240; i++){
-			      c = get_pixel(40, i, 3);
-			      if(c > 120){
-        		    whiteTotal++;
-				        whiteLocation = whiteLocation + (i-120);
-        	  }
-    		}
+        	c = get_pixel(40, i, 3);
+		if(c > 120){
+        		whiteTotal++;
+			whiteLocation = whiteLocation + (i-120);
+        	}
+    	}
     		
-    		for(i = 60; i < 70; i++){
-    		    c = get_pixel(i, 60, 3);
-    		    if(c > 120){
-    		        leftCheck++;
-    		    }
+    	for(i = 60; i < 70; i++){
+    		c = get_pixel(i, 60, 3);
+    		if(c > 120){
+    			leftCheck++;
     		}
+    	}
     		
-    		for(i = 60; i < 70; i++){
-    		    c = get_pixel(i, 180, 3);
-    		    if(c > 120){
-    		        rightCheck++;
-    		    }
+    	for(i = 60; i < 70; i++){
+    		c = get_pixel(i, 180, 3);
+    		if(c > 120){
+    			rightCheck++;
     		}
+    	}
         
         for(i = 30; i < 210; i++){
-            c = get_pixel(160, i, 3);
-            if(c > 120){
-                frontCheck++;
-            }
+        	c = get_pixel(160, i, 3);
+        	if(c > 120){
+                	frontCheck++;
+            	}
         }
         
         if(leftCheck > 5){
-            left = true;
+        	left = true;
         }
         if(frontCheck > 10){
-            front = true;
+        	front = true;
         }
         if(rightCheck > 5){
-            right = true;
+        	right = true;
         }
         
         if(left){
@@ -147,22 +148,27 @@ int main(){
             Sleep(0, 100000);                           //Turn around Sleep
         }
         else{
-            derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
-		  	    integWhite = integWhite + ((double)whiteLocation * 0.01);
-			      whiteLocation = whiteLocation/whiteTotal;
+        	derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
+		integWhite = integWhite + ((double)whiteLocation * 0.01);
+		whiteLocation = whiteLocation/whiteTotal;
 		
-			      // set_motor(1, ((int) ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
-			      // set_motor(2, -((int) (((whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+		// set_motor(1, ((int) ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+		// set_motor(2, -((int) (((whiteLocation*40/120)*kp+kd*derivWhite)+40)));
 		
-			      set_motor(1, ((int)(-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))));
-			      set_motor(2, -((int) (((whiteLocation*40/120)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)));
+		// motorOne = (-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))
+		// motorTwo = (((whiteLocation*1/3)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)
+		// set_motor(1, motorOne);
+		// set_motor(2, -motorTwo);
+		
+		set_motor(1, ((int)(-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))));
+		set_motor(2, -((int) (((whiteLocation*1/3)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)));
 			      
-			      prevWhiteLocation = whiteLocation;
-            Sleep(0,1000);
+		prevWhiteLocation = whiteLocation;
+        	Sleep(0,1000);
         }
     }
     
-    while(true){
+    while(true){ // [insert maze method, if we want to test one]
         
     }
         
