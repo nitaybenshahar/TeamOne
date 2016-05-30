@@ -16,9 +16,7 @@ int main(){
     int rightSensor;
     char c;
     int whiteWall;
-    bool noLeftWall, 
-    bool noRightWall, 
-    bool noWallAhead;
+    bool noLeftWall, noRightWall, noWallAhead;
     int THRESHOLD = 200;
     int totalWidth;
     double leftMotor, rightMotor;
@@ -45,10 +43,10 @@ int main(){
             	whiteWall++;
 	    }
     	}
-
 	if(whiteWall < 4){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
 	}
+	
 
 	if(leftSensor<THRESHOLD){
 	     noLeftWall = true;
@@ -56,7 +54,6 @@ int main(){
 	if(rightSensor<THRESHOLD){
 	     noRightWall = true;
 	}
-
 	if(noRightWall){
 
 	    set_motor(1, 10);//right motor
@@ -68,13 +65,17 @@ int main(){
 	    totalWidth = leftSensor + rightSensor;
 	    rightMotor = (leftSensor/totalWidth)*60;      //change threshold
 	    leftMotor = -(rightSensor/totalWidth)*60;
-
+	    set_motor(1, rightMotor);
+	    set_motor(2,leftMotor);
+	    
 	    Sleep(0,50000);
 	    //rotate back to centre
 	    leftMotor = -(leftSensor/totalWidth)*60;      //change threshold
 	    rightMotor = (rightSensor/totalWidth)*60;
+	    set_motor(1, rightMotor);
+	    set_motor(2, leftMotor);
+	    
 	    Sleep(0,50000);
-
 	}
 	else if(left){
 	    set_motor(1, 100);//right motor
@@ -87,7 +88,6 @@ int main(){
 	    set_motor(2, -60);                            //bigger so the back doesn't hit the wall
 	    Sleep(0,500000);               		  //Change thresholds
 	}
-
         Sleep(0,500000);                //TIME INTERVAL
     }
     return 0;
