@@ -28,9 +28,9 @@ int main(){
     
     //Line Following
     char c;
-    float kp = 0.80;
-    float ki = 0.02;
-    float kd = 0.04;
+    float kp = 0.8;
+    float ki = 0;
+    float kd = 0;
     int i;
     int leftCheck;
     int frontCheck;
@@ -59,12 +59,16 @@ int main(){
     
     //Send Signal to open gate
     connect_to_server("130.195.6.196", 1024);
-    send_to_server("please");
+    send_to_server("Please");
     receive_from_server(message);
     send_to_server(message);
     
-    //Line Following Section
+    //Go through gate method
+    set_motor(1, 42);
+    set_motor(2, -40);
+    Sleep(5, 0);
     
+    //Line Following Section
     //Loop runs until both sensors sense walls (start of maze)
     while((read_analog(0) < THRESHOLD) || (read_analog(1) < THRESHOLD)){
         
@@ -124,31 +128,35 @@ int main(){
             set_motor(2, 0);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 500000);                            //Left Sleep
+            printf("Left turn triggered");
+            Sleep(0, 350000);                            //Left Sleep
         }
         else if(front && right){
             set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 500000);                           //Front Sleep
+            printf("Front sleep triggered");
+            Sleep(0, 350000);                           //Front Sleep
         }
         else if(right){
             set_motor(1, 0);
             set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 500000);                           //Right Sleep
+            printf("Right turn triggered");
+            Sleep(0, 350000);                           //Right Sleep
         }
         else if(whiteTotal < 1){
             set_motor(1, -50);
             set_motor(2, 50);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 100000);                           //Turn around Sleep
+            printf("Reverse triggered");
+            Sleep(0, 700000);                           //Turn around Sleep
         }
         else{
-        	derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
+        	derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.001;
 		integWhite = integWhite + ((double)whiteLocation * 0.01);
 		whiteLocation = whiteLocation/whiteTotal;
 		
