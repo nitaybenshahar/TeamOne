@@ -46,6 +46,7 @@ int main(){
     	}
 	if(whiteWall < 4){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
+	    printf("Wall Ahead Wall ahead wall ahead!!!!!!!!!\n\n\n");
 	}
 	
 
