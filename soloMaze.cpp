@@ -41,7 +41,7 @@ int main(){
 	for(int i = 1; i<5; i++){
 
 	    c = get_pixel(340,i*45, 3);
- 	    if(c>150){                                    //change white threshold
+ 	    if(c>120){                                    //change white threshold
             	whiteWall++;
 	    }
     	}
@@ -50,52 +50,45 @@ int main(){
 	    noWallAhead = true; //rename
 	}
 
-	if(leftSensor>THRESHOLD){
+	if(leftSensor<THRESHOLD){
 	     noLeftWall = true;
 	}
-	if(rightSensor>THRESHOLD){
+	if(rightSensor<THRESHOLD){
 	     noRightWall = true;
 	}
 
 	if(noRightWall){
 
 	    set_motor(1, 10);//right motor
-	    set_motor(2, 100);//left motor               //Change thresholds
-	    Sleep(2,0);
-	    set_motor(1,0);
-	    set_motor(2,0);
+	    set_motor(2, -100);//left motor//CHANGE THRESHOLD
+	    Sleep(0,500000);//CHANGE THRESHOLD
 	}
-	else if(noWallAhead){//stay in the center of the maze
+	else if(noWallAhead){				//stay in the center of the maze
 
 	    totalWidth = leftSensor + rightSensor;
-	    rightMotor = (leftSensor/totalWidth)*50;      //vhange threshold
-	    leftMotor = (rightSensor/totalWidth)*50;
+	    rightMotor = (leftSensor/totalWidth)*60;      //change threshold
+	    leftMotor = -(rightSensor/totalWidth)*60;
 
 	    Sleep(0,50000);
 	    //rotate back to centre
-	    leftMotor = (leftSensor/totalWidth)*50;      //vhange threshold
-	    rightMotor = (rightSensor/totalWidth)*50;
+	    leftMotor = -(leftSensor/totalWidth)*60;      //change threshold
+	    rightMotor = (rightSensor/totalWidth)*60;
 	    Sleep(0,50000);
 
 	}
 	else if(left){
 	    set_motor(1, 100);//right motor
-	    set_motor(2, 10);//left motor               //Change thresholds
-	    Sleep(2,0);
-	    set_motor(1,0);
-	    set_motor(2,0);
+	    set_motor(2, -10);//left motor               //Change thresholds
+	    Sleep(0,500000);
 	}
 	else //pop a u turn
 	{
 	    set_motor(1, -50);
-	    set_motor(2, 60);//bigger so the back doesn't hit the wall               //Change thresholds
-	    Sleep(2,0);
-	    set_motor(1,0);
-	    set_motor(2,0);
-
+	    set_motor(2, -60);                            //bigger so the back doesn't hit the wall
+	    Sleep(0,500000);               		  //Change thresholds
 	}
 
-        Sleep(0,500000);
+        Sleep(0,500000);                //TIME INTERVAL
     }
     return 0;
 }
