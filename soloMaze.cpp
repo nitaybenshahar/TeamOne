@@ -35,18 +35,18 @@ int main(){
 	rightSensor = read_analog(1);
 	printf("left sensor: %d\nright sensor: %d\n", leftSensor, rightSensor);
 	//get data from camera
-//	take_picture();
+	take_picture();
 
-//	for(int i = 1; i<5; i++){
+	for(int i = 1; i<5; i++){
 
-//	    c = get_pixel(340,i*40, 3);
-// 	    if(c<120){                                    //change white threshold
-//            	whiteWall++;
-//	    }
-//    	}
-//	if(whiteWall < 4){                                 //Change threshold if theres problems
-//	    noWallAhead = true; //rename
-//	}
+	    c = get_pixel(320,i*40, 3);
+ 	    if(c<120){                                    //change white threshold
+            	whiteWall++;
+	    }
+    	}
+	if(whiteWall < 4){                                 //Change threshold if theres problems
+	    noWallAhead = true; //rename
+	}
 	
 
 	if(leftSensor<THRESHOLD){
