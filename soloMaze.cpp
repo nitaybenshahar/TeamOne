@@ -17,7 +17,7 @@ int main(){
     char c;
     int whiteWall;
     bool noLeftWall, noRightWall, noWallAhead;
-    int THRESHOLD = 350;
+    int THRESHOLD = 300;
     int totalWidth;
     signed int leftMotor, rightMotor;
 
@@ -28,7 +28,7 @@ int main(){
         //returns true if there isnt a wall
 	noLeftWall =false;
 	noRightWall = false;
-	noWallAhead = true;
+	noWallAhead = false;
 
 	//get data from sensors
         leftSensor = read_analog(0);
@@ -56,7 +56,6 @@ int main(){
 	     noRightWall = true;
 	}
 	if(noRightWall){
-//	    Sleep(0,100000);
 	    set_motor(1, 37);//right motor
 	    set_motor(2, -60);//left motor//CHANGE THRESHOLD
 	    Sleep(0,800000);//CHANGE THRESHOLD
