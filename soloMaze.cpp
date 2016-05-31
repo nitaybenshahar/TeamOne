@@ -42,7 +42,7 @@ int main(){
 	    c = get_pixel(320,i*30, 3);
  	    if(c>120){                                    //change white threshold
             	whiteWall++;
-            	printf("c is: %d",c);
+            	printf("c is: %d\n\n",c);
 	    }
     	}
     	
