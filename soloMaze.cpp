@@ -33,7 +33,7 @@ int main(){
 	//get data from sensors
         leftSensor = read_analog(0);
 	rightSensor = read_analog(1);
-	printf("left sensor: %d\nright sensor: %d\n", leftSensor, rightSensor);
+	//printf("left sensor: %d\nright sensor: %d\n", leftSensor, rightSensor);
 	//get data from camera
 	take_picture();
 
@@ -42,14 +42,14 @@ int main(){
 	    c = get_pixel(320,i*30, 3);
  	    if(c>120){                                    //change white threshold
             	whiteWall++;
-            	
+            	printf("c is: %d",c);
 	    }
     	}
     	
-	printf("whiteWall: %d", whiteWall);
+	//printf("whiteWall: %d", whiteWall);
 	if(whiteWall < 5){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
-	    printf("No wall ahead!!!!!!!!!\n\n\n");
+	  //  printf("No wall ahead!!!!!!!!!\n\n\n");
 	}
 	
 
