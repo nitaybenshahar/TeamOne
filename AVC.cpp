@@ -93,14 +93,14 @@ int main(){
     	}
     		
     	for(i = 60; i < 70; i++){
-    		c = get_pixel(i, 60, 3);
+    		c = get_pixel(i, 10, 3);
     		if(c > 120){
     			leftCheck++;
     		}
     	}
     		
     	for(i = 60; i < 70; i++){
-    		c = get_pixel(i, 180, 3);
+    		c = get_pixel(i, 230, 3);
     		if(c > 120){
     			rightCheck++;
     		}
@@ -113,7 +113,7 @@ int main(){
             	}
         }
         
-        if(leftCheck > 5){
+        if(leftCheck > 2){
         	left = true;
         }
         if(frontCheck > 10){
@@ -129,7 +129,7 @@ int main(){
             derivWhite = 0.0;
             integWhite = 0.0;
             printf("Left turn triggered");
-            Sleep(0, 350000);                            //Left Sleep
+            Sleep(0, 500000);                            //Left Sleep
         }
         else if(front && right){
             set_motor(1, 50);
@@ -137,7 +137,7 @@ int main(){
             derivWhite = 0.0;
             integWhite = 0.0;
             printf("Front sleep triggered");
-            Sleep(0, 350000);                           //Front Sleep
+            Sleep(0, 500000);                           //Front Sleep
         }
         else if(right){
             set_motor(1, 0);
@@ -145,31 +145,31 @@ int main(){
             derivWhite = 0.0;
             integWhite = 0.0;
             printf("Right turn triggered");
-            Sleep(0, 350000);                           //Right Sleep
+            Sleep(0, 500000);                           //Right Sleep
         }
         else if(whiteTotal < 1){
             set_motor(1, -50);
-            set_motor(2, 50);
+            set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
             printf("Reverse triggered");
-            Sleep(0, 700000);                           //Turn around Sleep
+            Sleep(0, 300000);                           //Turn around Sleep
         }
         else{
-        	derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.001;
+        	derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/0.01;
 		integWhite = integWhite + ((double)whiteLocation * 0.01);
 		whiteLocation = whiteLocation/whiteTotal;
 		
-		// set_motor(1, ((int) ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
-		// set_motor(2, -((int) (((whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+		 set_motor(1, ((int) ((-(whiteLocation*40/120)*kp+kd*derivWhite)+40)));
+		 set_motor(2, -((int) (((whiteLocation*40/120)*kp+kd*derivWhite)+40)));
 		
 		// motorOne = (-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))
 		// motorTwo = (((whiteLocation*1/3)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)
 		// set_motor(1, motorOne);
 		// set_motor(2, -motorTwo);
 		
-		set_motor(1, ((int)(-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))));
-		set_motor(2, -((int) (((whiteLocation*1/3)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)));
+		//set_motor(1, ((int)(-( ( (whiteLocation*1/3)*kp) + (derivWhite * kd) + (integWhite * ki) + 40))));
+		//set_motor(2, -((int) (((whiteLocation*1/3)*kp)+(derivWhite * kd) + (integWhite * ki) + 40)));
 			      
 		prevWhiteLocation = whiteLocation;
         	Sleep(0,1000);
