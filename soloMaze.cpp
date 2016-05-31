@@ -42,11 +42,14 @@ int main(){
 	    c = get_pixel(320,i*30, 3);
  	    if(c<120){                                    //change white threshold
             	whiteWall++;
+            	
 	    }
     	}
+    	
+	printf("whiteWall: %d", whiteWall);
 	if(whiteWall < 5){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
-	    printf("No wall ahead!!!!!!!!!\n\n\n");
+	    printf("No wall ahead!!!!!!!!!\n\n\n")
 	}
 	
 
