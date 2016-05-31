@@ -78,10 +78,20 @@ Kate,Chintan and Dash worked on the code and had lots of issues with only turnin
 In the afternoon Chin and Dash worked continued to work on it to no avail.
 
 Thursday
-Kate and Chintan both rewrote code for th line follower to try different logic. Kate's linefollower.cpp was the closest, however, even with trial and error Bambi swtill didnt follow the line properly. Three possible causes were decided upon, camera logic, hardware issue with wheels or other logic. 
+Kate and Chintan both rewrote code for the line follower to try different logic. Kate's linefollower.cpp was the closest, however, even with trial and error Bambi still didnt follow the line properly. Three possible causes were decided upon, camera logic, hardware issue with wheels or other logic. 
 
 Matt was sick and Nitay cant make thursdays.
 
 Patrick drew designs of the robot for reports.
 
 In the evening Kate created another possible set of code excluding the ngative logic which will be tested by those meeting on Friday.
+
+Friday
+The line following code was made to work.
+
+Monday 
+Kate, Matt, Nitay and Dash worked on code that trialled the PID and intersection code. PID was removed as it stuffed everything up and the intersection code managed to work about 50% of the time. The gate code was also included so that the robot could now make it to 75% half of the time.
+
+Tuesday 
+Nitay, Dash and Kate worked on the maze code and managed to get Bambi going straight and turning right, but not left. THey then later worked on it with Chintan and got the turns smoother and stopped it from going right at a left hand intersection, however, it then just seemed to have a seizure when it reached a left hand turn.
+Dash and Nitay worked on integrating all the code and found it to be worse??? TBC
