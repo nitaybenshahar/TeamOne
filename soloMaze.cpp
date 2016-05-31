@@ -37,16 +37,16 @@ int main(){
 	//get data from camera
 	take_picture();
 
-	for(int i = 1; i<5; i++){
+	for(int i = 1; i<8; i++){
 
-	    c = get_pixel(320,i*40, 3);
+	    c = get_pixel(320,i*30, 3);
  	    if(c<120){                                    //change white threshold
             	whiteWall++;
 	    }
     	}
-	if(whiteWall < 4){                                 //Change threshold if theres problems
+	if(whiteWall < 5){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
-	    printf("Wall Ahead Wall ahead wall ahead!!!!!!!!!\n\n\n");
+	    printf("No wall ahead!!!!!!!!!\n\n\n");
 	}
 	
 
