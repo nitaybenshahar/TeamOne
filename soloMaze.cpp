@@ -39,7 +39,7 @@ int main(){
 
 	for(int i = 1; i<8; i++){
 
-	    c = get_pixel(320,i*25, 3);
+	    c = get_pixel(0,i*25, 3);
  	    if(c>120){                                    //change white threshold
             	whiteWall++;
             	printf("c is: %d\n\n",c);
