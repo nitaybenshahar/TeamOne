@@ -62,7 +62,7 @@ int main(){
 	if(noRightWall){
 	    set_motor(1, 37);//right motor
 	    set_motor(2, -60);//left motor//CHANGE THRESHOLD
-	    Sleep(0,800000);//CHANGE THRESHOLD
+	    Sleep(0,600000);//CHANGE THRESHOLD
 	    printf("turning right");
 	}
 	else if(noWallAhead){				//stay in the center of the maze
@@ -83,7 +83,7 @@ int main(){
 	else if(noLeftWall){
 	    set_motor(1, 60);//right motor
 	    set_motor(2, -37);//left motor               //Change thresholds
-	    Sleep(0,800000);
+	    Sleep(0,600000);
 	   printf("left left left left");
 	}
 	else //pop a u turn
