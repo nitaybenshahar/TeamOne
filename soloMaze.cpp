@@ -49,7 +49,7 @@ int main(){
 	printf("whiteWall: %d", whiteWall);
 	if(whiteWall < 5){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
-	    printf("No wall ahead!!!!!!!!!\n\n\n")
+	    printf("No wall ahead!!!!!!!!!\n\n\n");
 	}
 	
 
