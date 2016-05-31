@@ -40,7 +40,7 @@ int main(){
 	for(int i = 1; i<8; i++){
 
 	    c = get_pixel(320,i*30, 3);
- 	    if(c<120){                                    //change white threshold
+ 	    if(c>120){                                    //change white threshold
             	whiteWall++;
             	
 	    }
