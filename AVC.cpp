@@ -122,16 +122,7 @@ int main(){
         if(rightCheck > 5){
         	right = true;
         }
-        
-        if(left){
-            set_motor(1, 50);
-            set_motor(2, 0);
-            derivWhite = 0.0;
-            integWhite = 0.0;
-            printf("Left turn triggered");
-            Sleep(0, 500000);                            //Left Sleep
-        }
-        else if(front && right){
+        if((front && right) || (front && left)){
             set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
@@ -139,6 +130,15 @@ int main(){
             printf("Front sleep triggered");
             Sleep(0, 500000);                           //Front Sleep
         }
+        else if(left){
+            set_motor(1, 50);
+            set_motor(2, 0);
+            derivWhite = 0.0;
+            integWhite = 0.0;
+            printf("Left turn triggered");
+            Sleep(0, 500000);                            //Left Sleep
+        }
+        
         else if(right){
             set_motor(1, 0);
             set_motor(2, -50);
