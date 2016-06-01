@@ -51,7 +51,7 @@ int main(){
 
     int whiteWall;
     bool noLeftWall, noRightWall, noWallAhead;
-    int THRESHOLD = 100;
+    int THRESHOLD = 250;
     int totalWidth;
     signed int leftMotor, rightMotor;
     
@@ -209,12 +209,12 @@ int main(){
 	     noRightWall = true;
 	}
 	if(noRightWall){
-	   set_motor(1, 42);
-	    set_motor(2, -40);
+	   set_motor(1, 32);
+	    set_motor(2, -30);
 	    Sleep(0, 300000);
 
-	    set_motor(1, 40);//right motor
-	    set_motor(2, -65);//left motor//CHANGE THRESHOLD
+	    set_motor(1, 37);//right motor
+	    set_motor(2, -67);//left motor//CHANGE THRESHOLD
 	    Sleep(0,900000);//CHANGE THRESHOLD
 	    printf("turning right\n");
 	}
@@ -243,13 +243,13 @@ int main(){
 	    Sleep(0,900000);
 	   printf("left left left left\n");
 	}
-	else //pop a u turn
-	{
+//	else //pop a u turn
+/*	{
 	   printf("pop a u turn\n");
 	    set_motor(1, -50);
 	    set_motor(2, -60);                            //bigger so the back doesn't hit the wall
 	    Sleep(0,100000);               		  //Change thresholds
-	}
+	}*/
 
         
     }   
