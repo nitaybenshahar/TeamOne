@@ -124,7 +124,7 @@ int main(){
         	right = true;
         }
         
-        else if((front && right) || (front && left)){
+        if((front && right) || (front && left)){
             set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
