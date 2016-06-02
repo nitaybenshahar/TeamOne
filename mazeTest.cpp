@@ -72,7 +72,7 @@ int main(){
 	printf("whiteWall: %d\n", whiteWall);
 	if(whiteWall < 5){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
-	  //  printf("No wall ahead!!!!!!!!!\n\n\n");
+	    printf("No wall ahead!!!!!!!!!\n\n\n");
 	}
 	
 
@@ -101,7 +101,7 @@ int main(){
 	    rightMotor = (rightSensor/10*1.1);
 	    set_motor(1, rightMotor);
 	    set_motor(2, leftMotor);
-	    printf("forwarsdgsdjksdgr\n");
+	    //printf("forwarsdgsdjksdgr\n");
 	    Sleep(0, 1);
 	}
 	else{//If there is a wall infront of it, turn towards the side that is open
@@ -109,19 +109,19 @@ int main(){
 	    set_motor(1, 37);//right motor
 	    set_motor(2, -67);//left motor//CHANGE THRESHOLD
 	    Sleep(0,600000);//CHANGE THRESHOLD
-	    printf("turning right\n");
+	    //printf("turning right\n");
 	    right = false;
 	  }
 	  else if(noLeftWall){
 	    set_motor(1, 66);//right motor
 	    set_motor(2, -32);//left motor               //Change thresholds
 	    Sleep(0,900000);
-	    printf("left left left left\n");
+	    //printf("left left left left\n");
 	    left = false;
 	  }
 	  else //pop a u turn
 	  {
-	    printf("pop a u turn\n");
+	    //printf("pop a u turn\n");
 	    set_motor(1, -50);
 	    set_motor(2, -60);                            //bigger so the back doesn't hit the wall
 	    Sleep(0,100000);               		  //Change thresholds
