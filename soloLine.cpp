@@ -28,9 +28,9 @@ int main(){
 
     //Line Following
     char c;
-    float kp = 0.80;
-    float ki = 0.05;//CHANGE THRESHOLD
-    float kd = 0.0;
+    float kp = 50;
+    float ki = 0.0;//CHANGE THRESHOLD
+    float kd = -1;
     int i;
     int leftCheck;
     int frontCheck;
@@ -61,15 +61,15 @@ int main(){
     //Networking Section
 
    // Send Signal to open gate
-    connect_to_server("130.195.6.196", 1024);
-    send_to_server("Please");
-    receive_from_server(message);
-    send_to_server(message);
+//    connect_to_server("130.195.6.196", 1024);
+  //  send_to_server("Please");
+    //receive_from_server(message);
+    //send_to_server(message);
 
     //Line Following Section
-    set_motor(1, 43);
-    set_motor(2, -40);
-    Sleep (5,0);
+    //set_motor(1, 43);
+  //  set_motor(2, -40);
+//    Sleep (5,0);
     //Loop runs until both sensors sense walls (start of maze)
     while((read_analog(0) < THRESHOLD) || (read_analog(1) < THRESHOLD)){
 
@@ -161,16 +161,16 @@ int main(){
         }
         else{
         //follow the line
-        derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/2;
-		    integWhite = integWhite + ((double)whiteLocation);
-	    	whiteLocation = whiteLocation/whiteTotal;
+        derivWhite = ((double)whiteLocation - (double)prevWhiteLocation)/240;
+	integWhite = integWhite + ((double)whiteLocation);
+   	whiteLocation = whiteLocation/whiteTotal;
 
-        rightMotor = (int) (40 + (-(whiteLocation*40/120)*kp-kd*derivWhite));
-        leftMotor =  -((int) (40 + ((whiteLocation*40/120)*kp+kd*derivWhite)));
+        rightMotor = (int) (45 + (-(whiteLocation*kp/120)-kd*derivWhite));
+        leftMotor =  -((int) (45 + ((whiteLocation*kp/120)+kd*derivWhite)));
         set_motor(1, rightMotor);
         set_motor(2, leftMotor);
-
-		prevWhiteLocation = whiteLocation;
+	printf("Left mtor: %d \n\n\nRight motor: %d\n\n\n", leftMotor, rightMotor);
+	prevWhiteLocation = whiteLocation;
         Sleep(0,1000);
         }
     }
