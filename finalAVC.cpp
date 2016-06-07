@@ -48,7 +48,12 @@ int main(){
     //Maze
     signed int leftSensor;
     signed int rightSensor;
-
+   
+    double leftSensorPrev;
+    double rightSensorPrev;
+    double error; 
+    double previousError;
+    double errorD;
     int whiteWall;
     bool noLeftWall, noRightWall, noWallAhead;
     int THRESHOLD = 250;
@@ -61,10 +66,10 @@ int main(){
     //Networking Section
     
    // Send Signal to open gate
-    connect_to_server("130.195.6.196", 1024);
-    send_to_server("Please");
-    receive_from_server(message);
-    send_to_server(message);
+//    connect_to_server("130.195.6.196", 1024);
+  //  send_to_server("Please");
+    //receive_from_server(message);
+   // send_to_server(message);
     
     //Line Following Section
     set_motor(1, 43);
@@ -186,7 +191,9 @@ int main(){
 	//printf("left sensor: %d\nright sensor: %d\n", leftSensor, rightSensor);
 	//get data from camera
 	take_picture();
-
+	 
+	error = 0;
+	
 	for(int i = 120; i<128; i++){
 
 	    c = get_pixel(300,i, 3);
@@ -195,7 +202,7 @@ int main(){
             }
     	}
     	
-	printf("whiteWall: %d\n", whiteWall);
+	//printf("whiteWall: %d\n", whiteWall);
 	if(whiteWall < 5){                                 //Change threshold if theres problems
 	    noWallAhead = true; //rename
 	  //  printf("No wall ahead!!!!!!!!!\n\n\n");
@@ -209,39 +216,58 @@ int main(){
 	     noRightWall = true;
 	}
 	if(noRightWall){
-	   set_motor(1, 32);
-	    set_motor(2, -30);
-	    Sleep(0, 300000);
+	    set_motor(1, 25);//right motor
+	    set_motor(2, -52);//left motor//CHANGE THRESHOLD
+	    Sleep(0, 200000);//CHANGE THRESHOLD
+	    leftSensorPrev = leftSensor;
+	    while(true){
+	        leftSensor = read_analog(0);
+		printf("Left Sensor: %d\n\n", leftSensor);
+	    	if(((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && (leftSensor > 300)){
+			break;
+		}
+	        leftSensorPrev = leftSensor;
+	    }
 
-	    set_motor(1, 37);//right motor
-	    set_motor(2, -67);//left motor//CHANGE THRESHOLD
-	    Sleep(0,900000);//CHANGE THRESHOLD
 	    printf("turning right\n");
 	}
 	else if(noWallAhead){				//stay in the center of the maze
-	    rightMotor = (leftSensor/10*1.1);      //change threshold
+/*	    rightMotor = (leftSensor/10*1.1);      //change threshold
 	    leftMotor = -(rightSensor/10);
 	    set_motor(1, rightMotor);
 	    set_motor(2,leftMotor);
 	    
 	    Sleep(0,1);
-	    //rotate back to centre
-	    leftMotor = -(leftSensor/10);      //change threshold
-	    rightMotor = (rightSensor/10*1.1);
+*/	    //rotate back to centre
+
+	    error = (rightSensor-leftSensor)*7/250;
+	   
+
+	    errorD =(error - previousError);
+	    printf("error: %f\nderivative error: %f\n", error, errorD);
+
+	    leftMotor = -(42-error-errorD);      //change threshold
+	    rightMotor = 40+error+errorD;
 	    set_motor(1, rightMotor);
 	    set_motor(2, leftMotor);
 	    printf("forwarsdgsdjksdgr\n");
+	    previousError = error;
 	    Sleep(0, 1);
 	}
 	else if(noLeftWall){
-	    set_motor(1, 40);
-	    set_motor(2,-42);
-
-	    Sleep(0,450000);
-	    set_motor(1, 66);//right motor
-	    set_motor(2, -32);//left motor               //Change thresholds
-	    Sleep(0,900000);
-	   printf("left left left left\n");
+	    set_motor(2, -25);//right motor
+            set_motor(1, 52);//left motor//CHANGE THRESHOLD
+            Sleep(0, 200000);//CHANGE THRESHOLD
+            rightSensorPrev = rightSensor;
+            while(true){
+                rightSensor = read_analog(0);
+                printf("Right Sensor: %d\n\n", rightSensor);
+                if(((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 300)){
+                        break;
+                }
+                rightSensorPrev = rightSensor;
+            }
+	    printf("left left left left\n");
 	}
 //	else //pop a u turn
 /*	{
@@ -249,9 +275,7 @@ int main(){
 	    set_motor(1, -50);
 	    set_motor(2, -60);                            //bigger so the back doesn't hit the wall
 	    Sleep(0,100000);               		  //Change thresholds
-	}*/
-
-        
+	}*/        
     }   
     
 return 0;    

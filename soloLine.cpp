@@ -38,6 +38,8 @@ int main(){
     bool left, front, right;
 
     int whiteTotal, prevWhiteLocation, whiteLocation, whiteLeft, whiteRight;
+    int whiteLeft2, whiteLeft3, whiteRight2, whiteRight3;
+    double whiteLocation2, whiteTotal2, whiteLocation3, whiteTotal3;
     //int motorOne, motorTwo;
 
     double whiteRatio;
@@ -83,7 +85,11 @@ int main(){
         rightCheck = 0;
 	whiteLeft = 0;
 	whiteRight = 0;
-        //Take readings
+        whiteLeft2 = 0;
+	whiteLeft3 = 0;
+	whiteRight2 = 0;
+	whiteRight3 = 0;
+	//Take readings
         take_picture();
 
         for(i = 0; i < 240; i++){
@@ -100,16 +106,58 @@ int main(){
 			whiteRight++;
 		}
     	}
+
+	for(i = 0; i < 240; i++){
+                c = get_pixel(25, i, 3);
+                if(c > 120){
+                        whiteTotal2++;
+                        whiteLocation2 = whiteLocation2 + (i-120);
+                }
+                if((i<120 && c>120)){
+                        whiteLeft2++;
+
+                }
+                if((i>=120 && c>120)){
+                        whiteRight2++;
+                }
+        }
+	for(i = 0; i < 240; i++){
+                c = get_pixel(10, i, 3);
+                if(c > 120){
+                        whiteTotal3++;
+                        whiteLocation3 = whiteLocation3 + (i-120);
+                }
+                if((i<120 && c>120)){
+                        whiteLeft3++;
+
+                }
+                if((i>=120 && c>120)){
+                        whiteRight3++;
+                }
+        }
+
+	if(whiteRight2>whiteRight){
+	    whiteRight = whiteRight2;
+	}
+	if(whiteRight3>whiteRight){
+	    whiteRight = whiteRight3;
+	}
+	if(whiteLeft2>whiteLeft){
+	    whiteLeft = whiteLeft2;
+	}
+	if(whiteLeft3>whiteLeft){
+	    whiteLeft = whiteLeft3;
+	}
 	printf("Whiteleft: %d\n\nWhiteright: %d\n\n", whiteLeft, whiteRight);
 
-    	for(i = 60; i < 300; i++){
+    	for(i = 10; i < 190; i++){
     		c = get_pixel(i, 10, 3);
     		if(c > 120){
     			leftCheck++;
     		}
     	}
 
-    	for(i = 60; i < 300; i++){
+    	for(i = 10; i < 190; i++){
     		c = get_pixel(i, 230, 3);
     		if(c > 120){
     			rightCheck++;
@@ -122,38 +170,52 @@ int main(){
                 	frontCheck++;
             	}
         }
-
-        if(whiteLeft >100){
-        	left = true;
-        }
+	if(leftCheck>5){
+	        if(whiteLeft >85){
+        		left = true;
+        	}
+	}
+	
         if(frontCheck > 5){
         	front = true;
         }
-        if(whiteRight>100){
-        	right = true;
-        }
+	if(rightCheck>5){
+       		if(whiteRight>85){
+        		right = true;
+        	}
+	}
 
-        if(left){
-            set_motor(1, 50);
-            set_motor(2, 0);
-            derivWhite = 0.0;
-            integWhite = 0.0;
-            Sleep(0, 300000);
-	    while(true){                           
-		printf("Whitenesnesnes: %d\n\n", c);
-                c = get_pixel(10, 120,3);
-                if(c>120){
-                    break;
-                }
-            }                             //Left Sleep
-        }
-        else if(front && right){
+	if((front && right) || (front && left)){
             set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
             Sleep(0, 500000);                           //Front Sleep
         }
+
+
+        else if(left){
+            set_motor(1, 50);
+            set_motor(2, 0);
+            derivWhite = 0.0;
+            integWhite = 0.0;
+            Sleep(0, 600000);
+	    while(true){                           
+		take_picture();
+                c = get_pixel(40, 120,3);
+		printf("Whiteness: %d\n\n", c);
+                if(c>120){
+                    break;
+                }
+            }                             //Left Sleep
+        }
+        /*else if(front && right){
+            set_motor(1, 50);
+            set_motor(2, -50);
+            derivWhite = 0.0;
+            integWhite = 0.0;
+            Sleep(0, 500000);                           //Front Sleep
+        }*/
         else if(right){
             set_motor(1, 0);
             set_motor(2, -50);
