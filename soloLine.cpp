@@ -28,7 +28,7 @@ int main(){
 
     //Line Following
     char c;
-    float kp = 50;
+    float kp = 55;
     float ki = 0.0;//CHANGE THRESHOLD
     float kd = -1;
     int i;
@@ -37,7 +37,7 @@ int main(){
     int rightCheck;
     bool left, front, right;
 
-    int whiteTotal, prevWhiteLocation, whiteLocation;
+    int whiteTotal, prevWhiteLocation, whiteLocation, whiteLeft, whiteRight;
     //int motorOne, motorTwo;
 
     double whiteRatio;
@@ -81,26 +81,35 @@ int main(){
         leftCheck = 0;
         frontCheck = 0;
         rightCheck = 0;
-
+	whiteLeft = 0;
+	whiteRight = 0;
         //Take readings
         take_picture();
 
         for(i = 0; i < 240; i++){
         	c = get_pixel(40, i, 3);
-		      if(c > 120){
-          	whiteTotal++;
-			      whiteLocation = whiteLocation + (i-120);
+		if(c > 120){
+	          	whiteTotal++;
+  		        whiteLocation = whiteLocation + (i-120);
         	}
-    	}
+		if((i<120 && c>120)){
+			whiteLeft++;
 
-    	for(i = 60; i < 70; i++){
+		}
+		if((i>=120 && c>120)){
+			whiteRight++;
+		}
+    	}
+	printf("Whiteleft: %d\n\nWhiteright: %d\n\n", whiteLeft, whiteRight);
+
+    	for(i = 60; i < 300; i++){
     		c = get_pixel(i, 10, 3);
     		if(c > 120){
     			leftCheck++;
     		}
     	}
 
-    	for(i = 60; i < 70; i++){
+    	for(i = 60; i < 300; i++){
     		c = get_pixel(i, 230, 3);
     		if(c > 120){
     			rightCheck++;
@@ -114,13 +123,13 @@ int main(){
             	}
         }
 
-        if(leftCheck > 5){
+        if(whiteLeft >100){
         	left = true;
         }
         if(frontCheck > 5){
         	front = true;
         }
-        if(rightCheck > 5){
+        if(whiteRight>100){
         	right = true;
         }
 
@@ -129,7 +138,14 @@ int main(){
             set_motor(2, 0);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 500000);                            //Left Sleep
+            Sleep(0, 300000);
+	    while(true){                           
+		printf("Whitenesnesnes: %d\n\n", c);
+                c = get_pixel(10, 120,3);
+                if(c>120){
+                    break;
+                }
+            }                             //Left Sleep
         }
         else if(front && right){
             set_motor(1, 50);
@@ -144,7 +160,8 @@ int main(){
             derivWhite = 0.0;
             integWhite = 0.0;
             Sleep(0, 500000);                           //Right Sleep
-        }
+            
+}
         else if(whiteTotal < 1){
             set_motor(1, -50);
             set_motor(2, -50);
@@ -169,7 +186,6 @@ int main(){
         leftMotor =  -((int) (45 + ((whiteLocation*kp/120)+kd*derivWhite)));
         set_motor(1, rightMotor);
         set_motor(2, leftMotor);
-	printf("Left mtor: %d \n\n\nRight motor: %d\n\n\n", leftMotor, rightMotor);
 	prevWhiteLocation = whiteLocation;
         Sleep(0,1000);
         }
