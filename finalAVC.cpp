@@ -79,9 +79,9 @@ int main(){
    // send_to_server(message);
     
     //Line Following Section
-    set_motor(1, 43);
-    set_motor(2, -40);
-    Sleep (5,0);
+    //set_motor(1, 43);
+    //set_motor(2, -40);
+    //Sleep (5,0);
     //Loop runs until both sensors sense walls (start of maze)
     while(DoNotEnterMaze){
 
