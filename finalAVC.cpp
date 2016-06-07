@@ -83,7 +83,7 @@ int main(){
     //set_motor(2, -40);
     //Sleep (5,0);
     //Loop runs until both sensors sense walls (start of maze)
-    while(DoNotEnterMaze){
+    while(true){
 
         //Set variables
         redTotal = 0;
@@ -110,8 +110,8 @@ int main(){
                 redTotal++;
             }
     	}
-    	if(redTotal>10){ //CHANGE THRESHOLD
-            break;//break to maze code
+    	if(redTotal>150){ //CHANGE THRESHOLD
+            printf("number of red: %d\n", redTotal);//break to maze code
     	}
 
 
@@ -197,8 +197,9 @@ int main(){
         front = true;
     }
     if(whiteRight>85){
-        if(leftCheck>5){//If there are left whitepixels, turn left instead
+        if(leftCheck>10){//If there are left whitepixels, turn left instead
             left = true;
+	    printf("left check: %d\n", leftCheck);
         }
         else{
             right = true;
@@ -207,16 +208,16 @@ int main(){
 
 
 
-	if((front && right) || (front && left)){
+	/*if((front && right) || (front && left)){
             set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
             Sleep(0, 500000);                           //Front Sleep
-        }
+        }*/
         else if(left){
             set_motor(1, 50);
-            set_motor(2, 0);
+            set_motor(2, 50);
             derivWhite = 0.0;
             integWhite = 0.0;
             Sleep(0, 600000);
@@ -229,15 +230,15 @@ int main(){
                 }
             }                             //Left Sleep
         }
-        /*else if(front && right){
+        else if(front && right){
             set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
             Sleep(0, 500000);                           //Front Sleep
-        }*/
+        }
         else if(right){
-            set_motor(1, 0);
+            set_motor(1, 50);
             set_motor(2, -50);
             derivWhite = 0.0;
             integWhite = 0.0;
