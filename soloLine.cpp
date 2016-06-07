@@ -46,7 +46,12 @@ int main(){
     double prevRatio;
     double derivWhite;
     double integWhite;
-
+    
+    //Interface to maze
+    bool DoNotEnterMaze = true;
+    int redTotal;
+   
+   
     //Maze
     signed int leftSensor;
     signed int rightSensor;
@@ -73,9 +78,10 @@ int main(){
   //  set_motor(2, -40);
 //    Sleep (5,0);
     //Loop runs until both sensors sense walls (start of maze)
-    while((read_analog(0) < THRESHOLD) || (read_analog(1) < THRESHOLD)){
+    while(DoNotEnterMaze){
 
         //Set variables
+        redTotal = 0;
         left = false;
         front = false;
         right = false;
@@ -91,6 +97,20 @@ int main(){
 	whiteRight3 = 0;
 	//Take readings
         take_picture();
+        
+        //Check for interface to the maze
+        for(i = 0; i < 240; i++){
+        	c = get_pixel(40, i, 0);//Gets redness of the pixel
+		if(c > 170){
+        		redTotal++;
+        	}
+    	}
+    	if(redTotal>10){ //CHANGE THRESHOLD
+            break;//break to maze code
+    	}
+    	
+    	
+    	
 
         for(i = 0; i < 240; i++){
         	c = get_pixel(40, i, 3);
