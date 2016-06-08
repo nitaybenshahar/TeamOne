@@ -327,22 +327,21 @@ int main(){
         if(rightSensor<350){
             noRightWall = true;
         }
-        if(noRightWall){
-
-            set_motor(1, 25);//right motor
-            set_motor(2, -52);//left motor//CHANGE THRESHOLD
+        if(noLeftWall){
+        	 printf("turning right\n");
+            set_motor(2, -25);//right motor
+            set_motor(1, 52);//left motor//CHANGE THRESHOLD
             Sleep(0, 200000);//CHANGE THRESHOLD
-	    leftSensorPrev = leftSensor;
+            rightSensorPrev = rightSensor;
             while(true){
-                leftSensor = read_analog(0);
-                printf("Left Sensor: %d\n\nChange in error: %d\n", leftSensor, (leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev));
-                if((((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && leftSensor>300)){
-                break;
+                rightSensor = read_analog(0);
+                printf("Right Sensor: %d\n\nChange in error squared: %d\n\n", rightSensor, (rightSensor-leftSensor)*(rightSensor-leftSensor));
+                if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 300))){//CHANGE THRESHOLDS
+                    break;
                 }
-	        leftSensorPrev = leftSensor;
+                rightSensorPrev = rightSensor;
             }
-
-            printf("turning right\n");
+            printf("left left left left\n");
         }
         else if(noWallAhead){				//stay in the center of the maze
 /*	    rightMotor = (leftSensor/10*1.1);      //change threshold
@@ -367,21 +366,19 @@ int main(){
             previousError = error;
             Sleep(0, 1);
         }
-        else if(noLeftWall){
-            set_motor(2, -25);//right motor
-            set_motor(1, 52);//left motor//CHANGE THRESHOLD
+        else if(noRightWall){
+            set_motor(1, 25);//right motor
+            set_motor(2, -52);//left motor//CHANGE THRESHOLD
             Sleep(0, 200000);//CHANGE THRESHOLD
-            rightSensorPrev = rightSensor;
+	    leftSensorPrev = leftSensor;
             while(true){
-                rightSensor = read_analog(0);
-                printf("Right Sensor: %d\n\nChange in error squared: %d\n\n", rightSensor, (rightSensor-leftSensor)*(rightSensor-leftSensor));
-                if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 300))){//CHANGE THRESHOLDS
-                    break;
+                leftSensor = read_analog(0);
+                printf("Left Sensor: %d\n\nChange in error: %d\n", leftSensor, (leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev));
+                if((((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && leftSensor>300)){
+                break;
                 }
-                rightSensorPrev = rightSensor;
+	        leftSensorPrev = leftSensor;
             }
-            printf("left left left left\n");
-        }
 	    else //pop a u turn
 	    {
             printf("pop a u turn\n");
