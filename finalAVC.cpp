@@ -37,7 +37,8 @@ int main(){
     int rightCheck;
     bool left, front, right;
 
-    int whiteTotal, prevWhiteLocation, whiteLocation, whiteLeft, whiteRight;
+    int prevWhiteLocation = 0;
+    int whiteTotal, whiteLocation, whiteLeft, whiteRight;
     int whiteLeft2, whiteLeft3, whiteRight2, whiteRight3;
     double whiteLocation2, whiteTotal2, whiteLocation3, whiteTotal3;
     //int motorOne, motorTwo;
@@ -83,7 +84,7 @@ int main(){
     //set_motor(2, -40);
     //Sleep (5,0);
     //Loop runs until both sensors sense walls (start of maze)
-    while(true){
+    while(read_analog(0)<THRESHOLD && read_analog(1)<THRESHOLD){
 
         //Set variables
         redTotal = 0;
@@ -132,7 +133,7 @@ int main(){
     	}
 
         for(i = 0; i < 240; i++){
-            c = get_pixel(25, i, 3);
+            c = get_pixel(5, i, 3);
             if(c > 120){
                 whiteTotal2++;
                 whiteLocation2 = whiteLocation2 + (i-120);
@@ -145,7 +146,7 @@ int main(){
             }
         }
         for(i = 0; i < 240; i++){
-            c = get_pixel(10, i, 3);
+            c = get_pixel(40, i, 3);
             if(c > 120){
                 whiteTotal3++;
                 whiteLocation3 = whiteLocation3 + (i-120);
@@ -170,44 +171,48 @@ int main(){
 	    whiteLeft = whiteLeft3;
 	}
 
-    for(i = 0; i < 190; i++){
-        c = get_pixel(i, 10, 3);
-        if(c > 120){
-            leftCheck++;
-        }
-    }
-    for(i = 0; i < 190; i++){
-        c = get_pixel(i, 230, 3);
-        if(c > 120){
-            rightCheck++;
-        }
-    }
+    	for(i = 0; i < 190; i++){
+           c = get_pixel(i, 10, 3);
+           if(c > 120){
+           	 leftCheck++;
+           }
+    	}
+    	for(i = 0; i < 190; i++){
+           c = get_pixel(i, 230, 3);
+           if(c > 120){
+           	 rightCheck++;
+           }
+       	}
 
-    for(i = 30; i < 210; i++){
-        c = get_pixel(160, i, 3);
-        if(c > 120){
-            frontCheck++;
+    	for(i = 30; i < 210; i++){
+            c = get_pixel(160, i, 3);
+            if(c > 120){
+            	frontCheck++;
+            }
+    	}
+    	if(leftCheck>3){
+    	    if(whiteLeft > 95){
+       	    	left = true;
+    	    }
         }
-    }
-    if(whiteLeft > 85){
-        left = true;
-    }
 
-    if(frontCheck > 5){
-        front = true;
-    }
-    if(whiteRight>85){
-        if(leftCheck>10){//If there are left whitepixels, turn left instead
-            left = true;
-	    printf("left check: %d\n", leftCheck);
+    	if(frontCheck > 5){
+            front = true;
+    	}
+    	if(rightCheck>3){
+    	    if(whiteRight>95){
+                if(leftCheck>40){//If there are left whitepixels, turn left instead
+            	    left = true;
+	    	    printf("left check: %d\n", leftCheck);
+            	}
+            	else
+	    	{
+            	    right = true;
+                }
+    	    }
         }
-        else{
-            right = true;
-        }
-    }
-
-
-
+    	printf("Right white: %d\nLeftWhite: %d\n", whiteRight, whiteLeft);
+	printf("LeftCheck: %d\n", leftCheck);
 	/*if((front && right) || (front && left)){
             set_motor(1, 50);
             set_motor(2, -50);
@@ -215,19 +220,25 @@ int main(){
             integWhite = 0.0;
             Sleep(0, 500000);                           //Front Sleep
         }*/
-        else if(left){
-            set_motor(1, 50);
-            set_motor(2, 50);
+        if(left){
+            set_motor(1, 60);
+            set_motor(2, 0);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 600000);
+            Sleep(0, 200000);
             while(true){
+		int kiaOra = 0;
                 take_picture();
-                c = get_pixel(40, 120,3);
+		for(int i =116; i<124; i++){
+                    c = get_pixel(20, i,3);
                 printf("Whiteness: %d\n\n", c);
-                if(c>120){
-                    break;
-                }
+                    if(c>120){
+                    kiaOra++;
+                    }
+		}
+		if(kiaOra>6){
+		    break;
+		}
             }                             //Left Sleep
         }
         else if(front && right){
@@ -238,12 +249,19 @@ int main(){
             Sleep(0, 500000);                           //Front Sleep
         }
         else if(right){
-            set_motor(1, 50);
-            set_motor(2, -50);
+            set_motor(1, 0);
+            set_motor(2, -60);
             derivWhite = 0.0;
             integWhite = 0.0;
-            Sleep(0, 500000);                           //Right Sleep
-
+            Sleep(0, 200000); 
+	    while(true){
+                take_picture();
+                c = get_pixel(10, 120,3);
+                printf("Whiteness: %d\n\n", c);
+                if(c>120){
+                    break;
+		}
+            }
         }
         else if(whiteTotal < 1){
             set_motor(1, -50);
@@ -254,9 +272,9 @@ int main(){
                 c = get_pixel(40, 120, 3);
                 if(c>120){
                     break;
-                }
-                Sleep(0, 100);
-            }
+	                
+	     }
+         }
             //Continues turning right until it finds the line
         }
         else{
@@ -284,20 +302,20 @@ int main(){
         //get data from sensors
         leftSensor = read_analog(0);
         rightSensor = read_analog(1);
-        //printf("left sensor: %d\nright sensor: %d\n", leftSensor, rightSensor);
+        printf("left sensor: %d\nright sensor: %d\n", leftSensor, rightSensor);
         //get data from camera
         take_picture();
 
         error = 0;
 
         for(int i = 120; i<128; i++){
-            c = get_pixel(300,i, 3);
-            if(c>120){                                    //change white threshold
+            c = get_pixel(200,i, 3);
+            if(c>190){                                    //change white threshold
             	whiteWall++;
             }
     	}
 
-        //printf("whiteWall: %d\n", whiteWall);
+        printf("whiteWall: %d\n", whiteWall);
         if(whiteWall < 5){                                 //Change threshold if theres problems
             noWallAhead = true; //rename
         //  printf("No wall ahead!!!!!!!!!\n\n\n");
@@ -317,8 +335,8 @@ int main(){
             leftSensorPrev = leftSensor;
             while(true){
                 leftSensor = read_analog(0);
-                printf("Left Sensor: %d\n\n", leftSensor);
-                if(((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && (leftSensor > 300)){
+                printf("Left Sensor: %d\n\nChange in error: %d\n", leftSensor, (leftSensor-rightSensor)*(leftSensor-rightSensor));
+                if(((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && (leftSensor > 350) || (leftSensor-rightSensor)*(leftSensor-rightSensor)>50000){
                 break;
                 }
 	        leftSensorPrev = leftSensor;
@@ -357,20 +375,29 @@ int main(){
             while(true){
                 rightSensor = read_analog(0);
                 printf("Right Sensor: %d\n\n", rightSensor);
-                if(((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 300)){//CHANGE THRESHOLDS
+                if(((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 350)||(leftSensor-rightSensor)*(leftSensor-rightSensor)>50000){//CHANGE THRESHOLDS
                     break;
                 }
                 rightSensorPrev = rightSensor;
             }
             printf("left left left left\n");
         }
-//	    else //pop a u turn
-/*	    {
+	    else //pop a u turn
+	    {
             printf("pop a u turn\n");
             set_motor(1, -50);
-            set_motor(2, -60);                            //bigger so the back doesn't hit the wall
-            Sleep(0,100000);               		  //Change thresholds
-        }*/
+            set_motor(2, -58);                            //bigger so the back doesn't hit the wall
+            Sleep(0,900000);               		  //Change thresholds
+	    set_motor(1, -50);
+	    set_motor(2, 0);
+	    Sleep(0, 800000);
+//	    set_motor(1, -50);
+//	    set_motor(2, -59);
+//	   Sleep(0, 900000);
+//	    set_motor(1, -50);
+//	    set_motor(2, 0);
+//	    Sleep(0, 800000);
+        }
     }
 
 return 0;
