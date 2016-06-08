@@ -83,7 +83,7 @@ int main(){
     //set_motor(2, -40);
     //Sleep (5,0);
     //Loop runs until both sensors sense walls (start of maze)
-    while(read_analog(0)<THRESHOLD && read_analog(1)<THRESHOLD){
+    while(read_analog(0)<THRESHOLD || read_analog(1)<THRESHOLD){
 
         //Set variables
         redTotal = 0;
@@ -220,26 +220,21 @@ int main(){
             Sleep(0, 500000);                           //Front Sleep
         }*/
         if(left){
-            set_motor(1, 60);
+            set_motor(1, 50);
             set_motor(2, 0);
             derivWhite = 0.0;
             integWhite = 0.0;
             Sleep(0, 200000);
             while(true){
-		int kiaOra = 0;
                 take_picture();
-		for(int i =116; i<124; i++){
-                    c = get_pixel(20, i,3);
+                c = get_pixel(10, i,3);
                 printf("Whiteness: %d\n\n", c);
                     if(c>120){
-                    kiaOra++;
+                    	break;
                     }
 		}
-		if(kiaOra>6){
-		    break;
-		}
             }                             //Left Sleep
-        }
+        
         else if(front && right){
             set_motor(1, 50);
             set_motor(2, -50);
@@ -331,17 +326,18 @@ int main(){
             int counter = 0;
 
             set_motor(1, 25);//right motor
-            set_motor(2, -52);//left motor//CHANGE THRESHOLD
+            set_motor(2, -54);//left motor//CHANGE THRESHOLD
             Sleep(0, 200000);//CHANGE THRESHOLD
 	    leftSensorPrev = leftSensor;
             while(true){
                 leftSensor = read_analog(0);
                 printf("Left Sensor: %d\n\nChange in error: %d\n", leftSensor, (leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev));
-                if((((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && leftSensor>300) || (counter>100)){
+                if((((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && leftSensor>350) || (counter>100)){
                 break;
                 }
 	        leftSensorPrev = leftSensor;
 	        counter++;
+		printf("Counter: %d\n\n", counter);
             }
 
             printf("turning right\n");
@@ -370,18 +366,19 @@ int main(){
         }
         else if(noLeftWall){
             int counter = 0;
-            set_motor(2, -25);//right motor
-            set_motor(1, 52);//left motor//CHANGE THRESHOLD
+            set_motor(2, -24);//right motor
+            set_motor(1, 55);//left motor//CHANGE THRESHOLD
             Sleep(0, 200000);//CHANGE THRESHOLD
             rightSensorPrev = rightSensor;
             while(true){
                 rightSensor = read_analog(0);
                 printf("Right Sensor: %d\n\nChange in error squared: %d\n\n", rightSensor, (rightSensor-leftSensor)*(rightSensor-leftSensor));
-                if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 300)) || (counter>100)){//CHANGE THRESHOLDS
+                if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 350)) || (counter>100)){//CHANGE THRESHOLDS
                     break;
                 }
                 rightSensorPrev = rightSensor;
                 counter++;
+		printf("Counter: %d\n\n", counter);
             }
             printf("left left left left\n");
         }
