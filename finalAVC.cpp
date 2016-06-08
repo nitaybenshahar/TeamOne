@@ -1,5 +1,4 @@
-# include <stdio.h>
-# include <time.h>
+# include <stdio.h> include <time.h>
 
 //FUNCTION INITIALIZATION
 
@@ -322,21 +321,22 @@ int main(){
         }
 
 
-        if(leftSensor<THRESHOLD){
+        if(leftSensor<350){
             noLeftWall = true;
         }
-        if(rightSensor<THRESHOLD){
+        if(rightSensor<350){
             noRightWall = true;
         }
         if(noRightWall){
+
             set_motor(1, 25);//right motor
             set_motor(2, -52);//left motor//CHANGE THRESHOLD
             Sleep(0, 200000);//CHANGE THRESHOLD
-            leftSensorPrev = leftSensor;
+	    leftSensorPrev = leftSensor;
             while(true){
                 leftSensor = read_analog(0);
-                printf("Left Sensor: %d\n\nChange in error: %d\n", leftSensor, (leftSensor-rightSensor)*(leftSensor-rightSensor));
-                if(((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && (leftSensor > 350) || (leftSensor-rightSensor)*(leftSensor-rightSensor)>50000){
+                printf("Left Sensor: %d\n\nChange in error: %d\n", leftSensor, (leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev));
+                if((((leftSensor-leftSensorPrev)*(leftSensor-leftSensorPrev)<50) && leftSensor>300)){
                 break;
                 }
 	        leftSensorPrev = leftSensor;
@@ -374,8 +374,8 @@ int main(){
             rightSensorPrev = rightSensor;
             while(true){
                 rightSensor = read_analog(0);
-                printf("Right Sensor: %d\n\n", rightSensor);
-                if(((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 350)||(leftSensor-rightSensor)*(leftSensor-rightSensor)>50000){//CHANGE THRESHOLDS
+                printf("Right Sensor: %d\n\nChange in error squared: %d\n\n", rightSensor, (rightSensor-leftSensor)*(rightSensor-leftSensor));
+                if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 300))){//CHANGE THRESHOLDS
                     break;
                 }
                 rightSensorPrev = rightSensor;
@@ -385,8 +385,8 @@ int main(){
 	    else //pop a u turn
 	    {
             printf("pop a u turn\n");
-            set_motor(1, -50);
-            set_motor(2, -58);                            //bigger so the back doesn't hit the wall
+            set_motor(1, -40);
+            set_motor(2, -62);                            //bigger so the back doesn't hit the wall
             Sleep(0,900000);               		  //Change thresholds
 	    set_motor(1, -50);
 	    set_motor(2, 0);
