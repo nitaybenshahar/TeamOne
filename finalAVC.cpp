@@ -379,6 +379,7 @@ int main(){
                 }
 	        leftSensorPrev = leftSensor;
             }
+        }
 	    else //pop a u turn
 	    {
             printf("pop a u turn\n");
