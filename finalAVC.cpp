@@ -233,7 +233,10 @@ int main(){
                     	break;
                     }
 		}
-            }                             //Left Sleep
+            set_motor(1, -25);
+	    set_motor(2, 25);
+	    Sleep(0, 300000);
+ }                             //Left Sleep
         
         else if(front && right){
             set_motor(1, 50);
@@ -269,6 +272,9 @@ int main(){
 	                
 	     }
          }
+		set_motor(1, -30);
+		set_motor(2, 30);
+		Sleep(0, 200000);
             //Continues turning right until it finds the line
         }
         else{
@@ -316,16 +322,16 @@ int main(){
         }
 
 
-        if(leftSensor<350){
+        if(leftSensor<400){
             noLeftWall = true;
         }
-        if(rightSensor<350){
+        if(rightSensor<400){
             noRightWall = true;
         }
         if(noRightWall){
             int counter = 0;
 
-            set_motor(1, 25);//right motor
+            set_motor(1, 26);//right motor
             set_motor(2, -54);//left motor//CHANGE THRESHOLD
             Sleep(0, 200000);//CHANGE THRESHOLD
 	    leftSensorPrev = leftSensor;
@@ -367,37 +373,37 @@ int main(){
         else if(noLeftWall){
             int counter = 0;
             set_motor(2, -24);//right motor
-            set_motor(1, 55);//left motor//CHANGE THRESHOLD
-            Sleep(0, 200000);//CHANGE THRESHOLD
+            set_motor(1, 59);//left motor//CHANGE THRESHOLD
+            Sleep(0, 700000);//CHANGE THRESHOLD
             rightSensorPrev = rightSensor;
-            while(true){
-                rightSensor = read_analog(0);
-                printf("Right Sensor: %d\n\nChange in error squared: %d\n\n", rightSensor, (rightSensor-leftSensor)*(rightSensor-leftSensor));
-                if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 350)) || (counter>100)){//CHANGE THRESHOLDS
-                    break;
-                }
-                rightSensorPrev = rightSensor;
-                counter++;
-		printf("Counter: %d\n\n", counter);
-            }
+            //while(true){
+              //  rightSensor = read_analog(0);
+               // printf("Right Sensor: %d\n\nChange in error squared: %d\n\n", rightSensor, (rightSensor-leftSensor)*(rightSensor-leftSensor));
+                //if((((rightSensor-rightSensorPrev)*(rightSensor-rightSensorPrev)<50) && (rightSensor > 350)) || (counter>100)){//CHANGE THRESHOLDS
+                  //  break;
+                //}
+                //rightSensorPrev = rightSensor;
+                //counter++;
+	//	printf("Counter: %d\n\n", counter);
+          //  }
             printf("left left left left\n");
         }
-	    else //pop a u turn
-	    {
-            printf("pop a u turn\n");
-            set_motor(1, -40);
-            set_motor(2, -62);                            //bigger so the back doesn't hit the wall
-            Sleep(0,900000);               		  //Change thresholds
-	    set_motor(1, -50);
-	    set_motor(2, 0);
-	    Sleep(0, 800000);
+//	    else //pop a u turn
+//	    {
+//            printf("pop a u turn\n");
+//            set_motor(1, -40);
+ //           set_motor(2, -62);                            //bigger so the back doesn't hit the wall
+ //           Sleep(0,900000);               		  //Change thresholds
+//	    set_motor(1, -50);
+//	    set_motor(2, 0);
+//	    Sleep(0, 800000);
 //	    set_motor(1, -50);
 //	    set_motor(2, -59);
 //	   Sleep(0, 900000);
 //	    set_motor(1, -50);
 //	    set_motor(2, 0);
 //	    Sleep(0, 800000);
-        }
+//        }
     }
 
 return 0;
