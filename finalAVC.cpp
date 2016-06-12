@@ -388,22 +388,22 @@ int main(){
           //  }
             printf("left left left left\n");
         }
-//	    else //pop a u turn
-//	    {
-//            printf("pop a u turn\n");
-//            set_motor(1, -40);
- //           set_motor(2, -62);                            //bigger so the back doesn't hit the wall
- //           Sleep(0,900000);               		  //Change thresholds
-//	    set_motor(1, -50);
-//	    set_motor(2, 0);
-//	    Sleep(0, 800000);
-//	    set_motor(1, -50);
-//	    set_motor(2, -59);
-//	   Sleep(0, 900000);
-//	    set_motor(1, -50);
-//	    set_motor(2, 0);
-//	    Sleep(0, 800000);
-//        }
+	    else //pop a u turn
+	    {
+            printf("pop a u turn\n");
+            set_motor(1, -40);
+            set_motor(2, -62);                            //bigger so the back doesn't hit the wall
+            Sleep(0,900000);               		  //Change thresholds
+	    set_motor(1, -50);
+	    set_motor(2, 0);
+	    Sleep(0, 800000);
+	    set_motor(1, -50);
+	    set_motor(2, -59);
+	   Sleep(0, 900000);
+	    set_motor(1, -50);
+	    set_motor(2, 0);
+	    Sleep(0, 800000);
+        }
     }
 
 return 0;
